@@ -1,0 +1,11 @@
+name = "chansondivine-fr"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "public"
+
+[[kv_namespaces]]
+binding = "ORDERS"
+id = "63e8cd6910fb40648f50f9d40dce7cee"
+
+[[r2_buckets]]
+binding = "AUDIO_BUCKET"
+bucket_name = "chansondivine-audios"
