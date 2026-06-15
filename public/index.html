@@ -1,0 +1,4062 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DivineSong — La Chanson Personnalisée</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Dancing+Script:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F7F4EF;
+    --cream-dark: #EDE9E1;
+    --dark: #1A1814;
+    --dark-secondary: #2A2620;
+    --wine: #6B2D5B;
+    --wine-hover: #7E3570;
+    --wine-light: #8B3A72;
+    --gold: #C9973A;
+    --text-primary: #1A1814;
+    --text-secondary: #5A5550;
+    --text-muted: #8A8480;
+    --border: #E0DBD3;
+    --white: #FFFFFF;
+    --purple-section: #5A1F4E;
+    --trustpilot-green: #00B67A;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    /* Espaço para o CTA fixo no mobile */
+    padding-bottom: 80px;
+  }
+  @media(min-width:901px){ body { padding-bottom:0; } }
+
+  /* ===== TOP BAR ===== */
+  .top-bar {
+    background: linear-gradient(90deg, #3D0F34 0%, #6B2D5B 40%, #8B3A72 70%, #5A1F4E 100%);
+    padding: 10px 20px;
+    text-align:center;
+  }
+  .top-bar-text {
+    font-size:14px;font-weight:500;color:#fff;letter-spacing:0.01em;
+  }
+  .top-bar-text em { font-style:italic;font-weight:600; }
+  .top-bar-link {
+    color:#fff;text-decoration:none;font-weight:700;
+    border-bottom:1px solid rgba(255,255,255,0.5);
+    transition:border-color 0.2s;
+  }
+  .top-bar-link:hover { border-color:#fff; }
+
+  /* ===== DISCOUNT BAR ===== */
+  .discount-bar {
+    background:#EDD9B8;
+    border-bottom:1px solid #D4C0A0;
+    padding:8px 16px;
+    display:flex;align-items:center;justify-content:center;
+    gap:6px;
+    font-family:var(--sans);
+    white-space:nowrap;
+  }
+  .discount-text {
+    font-size:12px;color:var(--text-primary);font-weight:400;
+  }
+  .discount-text strong { font-weight:700;color:var(--text-primary); }
+  .discount-badge {
+    display:inline-flex;align-items:center;gap:5px;
+    background:#fff;
+    border:1.5px solid #C8B898;
+    border-radius:8px;
+    padding:3px 10px;
+    font-size:12px;font-weight:600;color:var(--text-primary);
+    box-shadow:0 1px 3px rgba(0,0,0,0.06);
+    flex-shrink:0;
+  }
+  .discount-badge svg { flex-shrink:0; }
+
+  /* ===== ANNOUNCEMENT BAR ===== */
+  .announcement-bar {
+    background: var(--dark); color: #fff;
+    padding: 10px 20px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.01em; flex-wrap: wrap; text-align: center;
+  }
+  .announcement-bar .dot { width:6px;height:6px;background:#fff;border-radius:50%;display:inline-block;flex-shrink:0; }
+  .announcement-bar .dot.gold { background: var(--gold); }
+  .announcement-bar strong { color: var(--gold); }
+  .announcement-bar .live-badge { background:#3A3530;border:1px solid #555;padding:2px 6px;border-radius:4px;font-size:11px;letter-spacing:0.05em;color:#ccc; }
+  .announcement-bar .countdown { background:var(--gold);color:#fff;padding:2px 8px;border-radius:4px;font-weight:700;font-size:13px;font-variant-numeric:tabular-nums;min-width:46px;text-align:center; }
+  .announcement-bar .arrow-link { color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.4); }
+
+  /* ===== NAVBAR ===== */
+  .navbar {
+    background: var(--cream); border-bottom:1px solid var(--border);
+    padding:14px 40px; display:flex; align-items:center; justify-content:space-between;
+    position:sticky; top:0; z-index:200;
+  }
+  .navbar-logo { display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--text-primary); }
+  .navbar-logo svg { width:28px;height:18px; }
+  .navbar-logo span { font-family:var(--sans);font-size:15px;font-weight:500;letter-spacing:0.01em; }
+  .navbar-links { display:flex;align-items:center;gap:28px;list-style:none; }
+  .navbar-links a { font-size:14px;color:var(--text-secondary);text-decoration:none;transition:color 0.2s; }
+  .navbar-links a:hover { color:var(--text-primary); }
+  .navbar-links .star { color:var(--gold); }
+  .btn-nav { background:var(--wine);color:#fff;border:none;padding:11px 22px;border-radius:6px;font-size:14px;font-weight:500;font-family:var(--sans);cursor:pointer;text-decoration:none;transition:background 0.2s;white-space:nowrap; }
+  .btn-nav:hover { background:var(--wine-hover); }
+  .hamburger { display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px; }
+  .hamburger span { width:22px;height:2px;background:var(--text-primary);border-radius:1px; }
+
+  /* ===== HERO ===== */
+  .hero { padding:64px 40px 60px;max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;background:var(--cream); }
+  /* Hero mobile-first new elements */
+  .hero-eyebrow {
+    font-size:11px;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--text-muted);font-weight:600;
+    text-align:center;margin-bottom:14px;
+  }
+  .hero h1 {
+    font-family:var(--serif);font-size:clamp(28px,5.5vw,64px);
+    font-weight:400;line-height:1.15;color:var(--text-primary);
+    margin-bottom:24px;letter-spacing:-0.01em;
+    text-align:center;
+  }
+  .hero-craft-note {
+    text-align:center;font-size:13px;color:var(--text-muted);
+    margin:14px 0 20px;
+  }
+  /* Trustpilot row with mini avatars */
+  .hero-tp-row {
+    display:flex;align-items:center;justify-content:center;
+    gap:12px;
+  }
+  .hero-tp-avatars {
+    display:flex;align-items:center;
+  }
+  .tp-mini-avatar {
+    width:32px;height:32px;border-radius:50%;
+    border:2px solid #fff;
+    object-fit:cover;
+    margin-left:-8px;
+    background:var(--cream-dark);
+  }
+  .tp-mini-avatar:first-child { margin-left:0; }
+  .tp-mini-placeholder {
+    width:32px;height:32px;border-radius:50%;
+    border:2px solid #fff;
+    background:var(--cream-dark);
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;color:var(--text-muted);font-weight:600;
+    margin-left:-8px;
+  }
+  .hero-tp-info {}
+  .hero-tp-stars {
+    display:flex;align-items:center;gap:2px;margin-bottom:2px;
+  }
+  .hero-tp-stars span { color:var(--gold);font-size:15px; }
+  .hero-tp-rating { font-size:13px;font-weight:700;color:var(--text-primary);margin-left:4px; }
+  .hero-tp-text { font-size:12px;color:var(--text-secondary); }
+
+  /* Mobile: stack vertically, left content first */
+  @media(max-width:900px){
+    .hero { grid-template-columns:1fr;padding:32px 20px 28px;gap:24px; }
+    .hero h1 { font-size:26px;text-align:center; }
+    .hero-right { order:-1; }
+    .hero-eyebrow { text-align:center; }
+  }
+  .trustpilot-badge {
+    display:inline-flex;align-items:center;gap:8px;
+    background:#fff;
+    border:1.5px solid var(--border);
+    border-radius:100px;
+    padding:7px 14px 7px 10px;
+    text-decoration:none;
+    box-shadow:0 1px 6px rgba(0,0,0,0.07);
+    transition:box-shadow 0.2s,border-color 0.2s;
+  }
+  .trustpilot-badge:hover { box-shadow:0 3px 12px rgba(0,0,0,0.12);border-color:var(--text-muted); }
+  .stars { display:flex;gap:2px; }
+  .stars span { color:var(--gold);font-size:14px; }
+  .trustpilot-badge-text { font-size:13px;color:var(--text-secondary);font-weight:500; }
+  .hero h1 { font-family:var(--serif);font-size:clamp(42px,5.5vw,64px);font-weight:400;line-height:1.1;color:var(--text-primary);margin-bottom:20px;letter-spacing:-0.01em; }
+  .hero-sub { font-size:16px;color:var(--text-secondary);line-height:1.6;margin-bottom:32px;max-width:380px; }
+  .hero-ctas { display:flex;gap:14px;align-items:center;margin-bottom:20px;flex-wrap:wrap; }
+  .btn-primary {
+    background:var(--wine);color:#fff;border:none;
+    padding:16px 48px;
+    border-radius:10px;
+    font-size:16px;font-weight:600;
+    font-family:var(--sans);cursor:pointer;text-decoration:none;
+    transition:background 0.2s,transform 0.1s;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .btn-primary:hover { background:var(--wine-hover);transform:translateY(-1px); }
+  .btn-secondary { background:#fff;color:var(--text-primary);border:1.5px solid var(--border);padding:13px 24px;border-radius:8px;font-size:15px;font-weight:500;font-family:var(--sans);cursor:pointer;text-decoration:none;transition:border-color 0.2s,background 0.2s,box-shadow 0.2s;display:inline-flex;align-items:center;gap:6px;box-shadow:0 1px 4px rgba(0,0,0,0.07); }
+  .btn-secondary:hover { border-color:var(--text-secondary);background:#fff;box-shadow:0 3px 10px rgba(0,0,0,0.10); }
+  .hero-guarantee { display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text-muted); }
+
+  /* ===== HERO VIDEO ===== */
+  .hero-right { position:relative; }
+  .hero-video-wrap { border-radius:12px;overflow:hidden;background:#1A1410;aspect-ratio:4/3;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.18); }
+  .hero-video-el { width:100%;height:100%;object-fit:cover;display:block;cursor:pointer; }
+  /* Poster / loading state */
+  .hero-video-poster {
+    position:absolute;inset:0;
+    background:linear-gradient(160deg,#2D2420 0%,#1A1210 60%,#0D0A08 100%);
+    display:flex;align-items:center;justify-content:center;
+    transition:opacity 0.4s;
+    pointer-events:none;
+  }
+  .hero-video-poster.hidden { opacity:0; }
+  .video-handwriting { position:absolute;top:20px;right:30px;font-family:var(--serif);font-style:italic;font-size:18px;color:#fff;text-shadow:1px 1px 4px rgba(0,0,0,0.6);transform:rotate(-8deg);line-height:1.3;pointer-events:none;z-index:3; }
+  /* Controls bar over hero video */
+  .hero-video-controls {
+    position:absolute;bottom:0;left:0;right:0;
+    padding:24px 14px 12px;
+    background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,transparent 100%);
+    display:flex;align-items:center;justify-content:space-between;
+    z-index:4;
+  }
+  .hero-vid-label { font-size:11px;color:rgba(255,255,255,0.75);letter-spacing:0.04em;background:rgba(0,0,0,0.35);padding:3px 8px;border-radius:4px; }
+  .hero-vid-btns { display:flex;gap:8px;align-items:center; }
+  .vid-ctrl-btn {
+    background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);
+    border:1px solid rgba(255,255,255,0.25);border-radius:50%;
+    width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;color:#fff;transition:background 0.2s;flex-shrink:0;
+  }
+  .vid-ctrl-btn:hover { background:rgba(255,255,255,0.28); }
+  .vid-ctrl-btn svg { width:14px;height:14px;pointer-events:none; }
+  /* Big centered play button (shown when paused) */
+  .hero-play-overlay {
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    z-index:5;pointer-events:none;transition:opacity 0.2s;
+  }
+  .hero-play-overlay.hidden { opacity:0;pointer-events:none; }
+  .hero-play-big {
+    width:60px;height:60px;background:rgba(255,255,255,0.9);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    pointer-events:all;cursor:pointer;transition:transform 0.2s,background 0.2s;
+    box-shadow:0 4px 24px rgba(0,0,0,0.3);
+  }
+  .hero-play-big:hover { transform:scale(1.08);background:#fff; }
+  .hero-play-big svg { fill:var(--dark);width:22px;height:22px;margin-left:3px; }
+  .hero-video-caption { text-align:center;font-size:13px;color:var(--text-muted);margin-top:12px;font-style:italic; }
+
+  /* ===== DARK — REAL REACTIONS ===== */
+  .section-dark { background:var(--dark);padding:72px 0 64px; overflow:hidden; }
+  .section-dark-inner { padding:0 40px; }
+  .section-label { display:block;text-align:center;font-size:11px;letter-spacing:0.15em;font-weight:600;text-transform:uppercase;margin-bottom:20px; }
+  .section-dark .section-label { color:#9B6B9B; }
+  .section-dark h2 {
+    font-family:var(--serif);
+    font-size:clamp(36px,5.5vw,64px);
+    font-weight:400;color:#fff;text-align:center;line-height:1.1;
+    margin-bottom:18px;
+    letter-spacing:-0.01em;
+  }
+  .section-dark > .section-dark-inner > p {
+    color:rgba(255,255,255,0.55);text-align:center;font-size:16px;
+    max-width:560px;margin:0 auto 52px;line-height:1.65;
+  }
+
+  /* ===== CAROUSEL — full-bleed cinematic ===== */
+  .carousel-outer {
+    position:relative;
+    width:100%;
+    /* overflow visible so side cards bleed out */
+  }
+  .carousel-track-wrap { overflow:hidden; }
+  .carousel-track {
+    display:flex;
+    gap:0;
+    transition:transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+    align-items:center; /* side cards shorter, center taller */
+    will-change:transform;
+  }
+
+  /* Side cards */
+  .carousel-card {
+    flex:0 0 27%;
+    position:relative;
+    cursor:pointer;
+    transition:flex 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+    border-radius:0;
+    overflow:hidden;
+    background:#111;
+  }
+  /* Center card — wider, taller */
+  .carousel-card.center-card {
+    flex:0 0 46%;
+    z-index:2;
+    border-radius:16px;
+  }
+  /* Darken non-center cards */
+  .carousel-card:not(.center-card)::after {
+    content:'';
+    position:absolute;inset:0;
+    background:rgba(0,0,0,0.45);
+    z-index:2;
+    pointer-events:none;
+    transition:opacity 0.45s;
+  }
+
+  /* Video fill */
+  .card-video-wrap {
+    position:relative;
+    aspect-ratio:9/16;
+    background:#0D0A08;
+    overflow:hidden;
+  }
+  /* Center card taller aspect */
+  .carousel-card.center-card .card-video-wrap {
+    aspect-ratio:9/14;
+  }
+  .card-video-el { width:100%;height:100%;object-fit:cover;display:block; }
+
+  /* Poster */
+  .card-video-poster {
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    transition:opacity 0.3s;
+  }
+  .card-video-poster.hidden { opacity:0;pointer-events:none; }
+  .card-video-poster-bg { position:absolute;inset:0;background:linear-gradient(150deg,#1A1210 0%,#3D2820 100%); }
+  .card-video-poster-icon { position:relative;z-index:1;font-size:44px;opacity:0.2; }
+
+  /* Play overlay — center of card */
+  .card-play-overlay {
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    z-index:3;transition:opacity 0.2s;
+  }
+  .card-play-overlay.hidden { opacity:0;pointer-events:none; }
+  .card-play-btn {
+    width:48px;height:48px;
+    background:rgba(255,255,255,0.18);backdrop-filter:blur(6px);
+    border:1.5px solid rgba(255,255,255,0.35);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    transition:background 0.2s,transform 0.15s;
+  }
+  .card-play-btn:hover { background:rgba(255,255,255,0.3);transform:scale(1.08); }
+  .card-play-btn svg { fill:#fff;width:16px;height:16px;margin-left:2px; }
+
+  /* "Activer le son" badge — top center of center card */
+  .center-card-overlay {
+    position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:5;
+    background:rgba(255,255,255,0.92);backdrop-filter:blur(8px);
+    border-radius:100px;
+    padding:7px 16px;font-size:13px;color:#1A1814;font-weight:500;
+    display:flex;align-items:center;gap:7px;cursor:pointer;
+    white-space:nowrap;
+    transition:background 0.2s,transform 0.15s;
+    box-shadow:0 2px 12px rgba(0,0,0,0.25);
+  }
+  .center-card-overlay:hover { background:#fff;transform:translateX(-50%) scale(1.03); }
+  .center-card-overlay svg { width:14px;height:14px; }
+
+  /* Bottom info bar — overlaid on video */
+  .card-bottom-bar {
+    position:absolute;bottom:0;left:0;right:0;z-index:4;
+    padding:32px 14px 14px;
+    background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.3) 60%,transparent 100%);
+  }
+  /* Side cards — simple title overlay */
+  .card-side-label {
+    font-size:13px;font-weight:600;color:#fff;
+    line-height:1.3;margin-bottom:2px;
+    text-shadow:0 1px 4px rgba(0,0,0,0.6);
+  }
+  .card-side-sub {
+    font-size:12px;color:rgba(255,255,255,0.6);
+  }
+  /* Center card — rich pill bar */
+  .card-center-bar {
+    background:rgba(20,16,12,0.88);backdrop-filter:blur(10px);
+    border-radius:12px;padding:12px 14px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .card-center-bar .bar-info { flex:1;min-width:0; }
+  .card-center-bar .bar-title {
+    font-size:16px;font-weight:600;color:#fff;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    margin-bottom:4px;
+  }
+  .card-center-bar .bar-badges { display:flex;align-items:center;gap:6px; }
+  .bar-badge {
+    background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);
+    font-size:11px;font-weight:500;padding:2px 8px;border-radius:4px;
+  }
+  .bar-time { font-size:11px;color:rgba(255,255,255,0.5); }
+  .bar-play-btn {
+    width:38px;height:38px;flex-shrink:0;
+    background:rgba(255,255,255,0.18);border:1.5px solid rgba(255,255,255,0.3);
+    border-radius:50%;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:background 0.2s;
+  }
+  .bar-play-btn:hover { background:rgba(255,255,255,0.3); }
+  .bar-play-btn svg { fill:#fff;width:13px;height:13px;margin-left:2px; }
+
+  /* Progress bar inside center bar */
+  .bar-progress { height:2px;background:rgba(255,255,255,0.2);border-radius:1px;margin-top:8px;overflow:hidden; }
+  .bar-progress-fill { height:100%;background:#fff;border-radius:1px;width:0%;transition:width 0.1s linear; }
+
+  /* Mute/progress controls (visible on hover/playing) */
+  .card-video-controls {
+    position:absolute;bottom:0;left:0;right:0;
+    padding:18px 10px 8px;
+    background:linear-gradient(to top,rgba(0,0,0,0.65) 0%,transparent 100%);
+    display:flex;align-items:center;gap:8px;
+    z-index:4;opacity:0;transition:opacity 0.2s;
+  }
+  .carousel-card:hover .card-video-controls,
+  .carousel-card.playing .card-video-controls { opacity:1; }
+  .card-mute-btn { background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;flex-shrink:0; }
+  .card-mute-btn svg { width:11px;height:11px;pointer-events:none; }
+  .card-progress-wrap { flex:1;position:relative; }
+  .card-progress-bg { height:3px;background:rgba(255,255,255,0.2);border-radius:2px;cursor:pointer;position:relative;overflow:hidden; }
+  .card-progress-fill { height:100%;background:var(--wine-light);border-radius:2px;width:0%;transition:width 0.1s linear; }
+
+  /* Dots */
+  .carousel-dots { display:flex;justify-content:center;gap:6px;margin-top:28px; }
+  .dot-indicator { width:24px;height:4px;background:rgba(255,255,255,0.2);border-radius:2px;cursor:pointer;transition:background 0.2s,width 0.2s; }
+  .dot-indicator.active { background:#fff;width:32px; }
+
+  /* Hide old fade overlays and nav buttons */
+  .carousel-fade-left,.carousel-fade-right { display:none; }
+  .carousel-btn { display:none; }
+
+  /* Unused old classes kept for JS compat */
+  .carousel-card-info { display:none; }
+  .card-audio-bar,.card-description { display:none; }
+
+  /* ===== AUDIO PLAYER (small cards) ===== */
+  .audio-player-custom {
+    display:flex;align-items:center;gap:10px;
+    background:rgba(255,255,255,0.05);
+    border-radius:8px;padding:10px 12px;margin:0 14px 14px;
+  }
+  .audio-play-btn { width:32px;height:32px;background:var(--wine);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;border:none;transition:background 0.2s; }
+  .audio-play-btn:hover { background:var(--wine-hover); }
+  .audio-play-btn svg { fill:#fff;width:12px;height:12px;margin-left:2px; }
+  .audio-player-right { flex:1;min-width:0; }
+  .audio-progress-wrap { height:3px;background:rgba(255,255,255,0.15);border-radius:2px;cursor:pointer;position:relative;overflow:hidden;margin-bottom:4px; }
+  .audio-progress-track { height:100%;background:var(--wine-light);border-radius:2px;width:0%;transition:width 0.1s linear; }
+  .audio-time-row { display:flex;justify-content:space-between;font-size:10px;color:#666; }
+
+  /* ===== REACTION CARDS (purple section) — with video ===== */
+  .reaction-card { background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:10px;overflow:hidden;cursor:pointer;position:relative; }
+  .reaction-video-wrap { position:relative;aspect-ratio:3/4;background:rgba(0,0,0,0.3);overflow:hidden; }
+  .reaction-video-el { width:100%;height:100%;object-fit:cover;display:block; }
+  .reaction-poster { position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transition:opacity 0.3s; }
+  .reaction-poster.hidden { opacity:0;pointer-events:none; }
+  .reaction-poster-bg { position:absolute;inset:0; }
+  .reaction-poster-text { position:absolute;top:10px;left:10px;right:10px;font-size:12px;color:rgba(255,255,255,0.75);line-height:1.4;z-index:1; }
+  .reaction-play-btn { position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;background:rgba(255,255,255,0.85);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;transition:transform 0.15s; }
+  .reaction-play-btn:hover { transform:translate(-50%,-50%) scale(1.1); }
+  .reaction-play-btn svg { fill:var(--dark);width:14px;height:14px;margin-left:2px; }
+  .reaction-card-bottom { padding:10px 12px; }
+  .reaction-tag { display:inline-block;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);font-size:10px;padding:2px 7px;border-radius:3px;margin-bottom:5px;letter-spacing:0.03em; }
+  .reaction-card-title { font-family:var(--serif);font-size:13px;color:#fff;font-weight:400;line-height:1.3;margin-bottom:3px; }
+  .reaction-card-sub { font-size:11px;color:rgba(255,255,255,0.5); }
+
+  /* ===== HOW IT WORKS ===== */
+  .section-light { background:var(--cream);padding:80px 40px; }
+  .section-light .section-label {
+    font-size:11px;letter-spacing:0.16em;font-weight:600;
+    text-transform:uppercase;color:#9B6B9B;
+    display:block;text-align:center;margin-bottom:18px;
+  }
+  .section-light h2 {
+    font-family:var(--serif);
+    font-size:clamp(36px,5vw,58px);
+    font-weight:300;
+    line-height:1.15;
+    text-align:center;
+    color:var(--text-primary);
+    margin-bottom:14px;
+    letter-spacing:-0.01em;
+  }
+  .section-sub {
+    text-align:center;color:var(--text-secondary);
+    font-size:16px;font-weight:400;line-height:1.6;
+    margin-bottom:52px;max-width:400px;margin-left:auto;margin-right:auto;
+  }
+  .steps-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1020px;margin:0 auto 40px; }
+
+  .step-card {
+    background:#fff;
+    border:1.5px solid #1A1814;
+    border-radius:22px;
+    padding:20px 20px 20px;
+    box-shadow:4px 4px 0px 0px #1A1814;
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .step-card:hover {
+    transform:translateY(-2px);
+    box-shadow:6px 6px 0px 0px #1A1814;
+  }
+
+  .step-header {
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:10px;
+  }
+  .step-num {
+    width:34px;height:34px;
+    background:#5C2D5C;
+    color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);
+    font-size:16px;font-weight:400;font-style:italic;
+    flex-shrink:0;line-height:1;
+  }
+  .step-badge {
+    font-size:11px;letter-spacing:0.09em;font-weight:500;
+    color:var(--text-muted);text-transform:uppercase;
+  }
+  .step-divider {
+    border:none;
+    border-top:1px dashed #C8C4BC;
+    margin:0 0 14px 0;
+  }
+  .step-card h3 {
+    font-family:var(--serif);
+    font-size:20px;font-weight:400;
+    color:var(--text-primary);
+    line-height:1.3;margin-bottom:12px;
+  }
+  .step-card p {
+    font-size:13.5px;color:var(--text-secondary);line-height:1.65;
+  }
+  .step-footer {
+    margin-top:14px;
+    padding-top:12px;
+    border-top:1px dashed #C8C4BC;
+    font-size:13px;color:var(--text-muted);font-style:normal;
+  }
+  .start-here-label { text-align:left;font-size:11px;color:var(--text-muted);letter-spacing:0.09em;text-transform:uppercase;margin-bottom:10px;max-width:1020px;margin-left:auto;margin-right:auto; }
+  .start-here-label::before { content:'↓';margin-right:5px; }
+  .cta-center { text-align:center;margin-top:10px; }
+  .cta-note { display:block;text-align:center;font-size:13px;color:var(--text-muted);margin-top:12px;font-style:italic; }
+
+  /* ===== QUESTION SECTION ===== */
+  .section-question { background:var(--dark);min-height:460px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 40px;position:relative;overflow:hidden;text-align:center; }
+  .section-question::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(107,45,91,0.25) 0%,transparent 70%);pointer-events:none; }
+  .section-question .eyebrow { font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--wine-light);margin-bottom:20px; }
+  .section-question h2 { font-family:var(--serif);font-size:clamp(28px,4.5vw,52px);font-weight:400;color:#fff;line-height:1.25;max-width:640px;margin-bottom:44px; }
+  .section-question h2 em { color:var(--gold);font-style:italic; }
+  .cta-dark-sub { display:block;color:var(--text-muted);font-size:13px;margin-top:14px; }
+
+  /* ===== STORY ===== */
+  .section-story { background:var(--cream);padding:80px 40px; }
+  .story-eyebrow { text-align:center;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-muted);font-weight:600;margin-bottom:18px; }
+  .story-headline { font-family:var(--serif);font-size:clamp(34px,4.5vw,52px);font-weight:300;line-height:1.15;text-align:center;color:var(--text-primary);margin-bottom:14px;letter-spacing:-0.01em; }
+  .story-headline em { color:var(--gold);font-style:italic;font-weight:300; }
+  .story-sub { text-align:center;font-size:16px;color:var(--text-secondary);margin-bottom:52px;max-width:420px;margin-left:auto;margin-right:auto;line-height:1.6; }
+  .story-split { display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:900px;margin:0 auto 60px; }
+  .story-form-side { display:flex;flex-direction:column;gap:12px; }
+
+  /* "● WHAT HE WROTE" label */
+  .story-what-label { display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);font-weight:500;margin-bottom:14px; }
+  .story-what-label::before { content:'●';font-size:8px;color:var(--text-muted); }
+
+  /* Form field cards — borda escura + sombra sólida lateral */
+  .form-field-mock { background:#fff;border:1.5px solid #1A1814;border-radius:14px;padding:14px 16px;box-shadow:3px 3px 0px 0px #1A1814; }
+  .form-field-mock .field-label { font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;font-weight:500; }
+  .form-field-mock .field-tags { display:flex;gap:6px;flex-wrap:wrap; }
+
+  /* Tags — pill com borda + sombra */
+  .field-tag { background:#EDE0C8;border:1.5px solid #1A1814;border-radius:100px;padding:4px 12px;font-size:12px;color:var(--text-primary);font-weight:500;box-shadow:2px 2px 0px 0px #1A1814; }
+  .form-field-mock .field-text { font-size:14px;color:var(--text-primary);line-height:1.6; }
+  .song-output-label {
+    font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--text-muted);font-weight:500;
+    margin-bottom:14px;display:flex;align-items:center;gap:7px;
+  }
+  .song-output-label::before { content:'●';font-size:8px;color:var(--text-muted); }
+
+  /* BECOMES arrow row */
+  .becomes-arrow {
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    margin:0 0 16px 0;
+  }
+  .becomes-arrow-line { display:none; }
+  .becomes-arrow-icon { display:none; }
+
+  /* Song line cards — borda escura + sombra sólida + todo texto serif itálico */
+  .song-line {
+    background:#fff;
+    border:1.5px solid #1A1814;
+    border-radius:14px;
+    padding:16px 18px;
+    margin-bottom:10px;
+    box-shadow:3px 3px 0px 0px #1A1814;
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:15px;
+    color:#5A5550;
+    line-height:1.6;
+  }
+  /* Highlighted/poetic words in wine-orange */
+  .song-line .italic-text {
+    font-style:italic;
+    color:#C0622A;
+    font-family:var(--serif);
+    font-size:15px;
+  }
+  .song-line .plain-text {
+    font-style:italic;
+    color:#5A5550;
+    font-family:var(--serif);
+  }
+  .story-card { max-width:900px;margin:0 auto;display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start; }
+
+  /* Player card — polaroid style */
+  .song-player-mock {
+    background:#fff;
+    border:1.5px solid #1A1814;
+    border-radius:20px;
+    overflow:visible;
+    box-shadow:4px 4px 0px 0px #1A1814;
+    position:relative;
+    transform:rotate(-2deg);
+    transition:transform 0.3s ease;
+  }
+  .song-player-mock:hover {
+    transform:rotate(0deg);
+  }
+
+  /* Tape strips on top */
+  .player-tape {
+    position:absolute;
+    top:-14px;
+    width:52px;height:22px;
+    background:rgba(255,240,180,0.82);
+    border-radius:3px;
+    box-shadow:0 1px 4px rgba(0,0,0,0.12);
+    z-index:2;
+  }
+  .player-tape.left  { left:28px;  transform:rotate(-4deg); }
+  .player-tape.right { right:28px; transform:rotate(4deg); }
+
+  /* Cover — sepia collage feel, portrait ratio */
+  .player-cover {
+    width:100%;
+    aspect-ratio:3/4;
+    border-radius:18px 18px 0 0;
+    overflow:hidden;
+    position:relative;
+    background:
+      linear-gradient(160deg,
+        rgba(30,20,10,0.45) 0%,
+        rgba(0,0,0,0.1) 50%,
+        rgba(20,15,5,0.5) 100%),
+      linear-gradient(135deg,
+        #8B6914 0%, #C4962A 20%,
+        #7A5A10 40%, #D4A843 55%,
+        #6B4A08 70%, #B8892A 85%,
+        #5A3A06 100%);
+  }
+  /* Sepia texture overlay */
+  .player-cover::before {
+    content:'';
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 60% 50% at 30% 60%, rgba(180,140,60,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 75% 30%, rgba(200,160,80,0.25) 0%, transparent 55%);
+    z-index:1;
+  }
+
+  /* Cursive song title over cover */
+  .player-cover-text {
+    position:absolute;
+    bottom:20px;left:0;right:0;
+    text-align:center;
+    font-family:'Dancing Script', var(--serif);
+    font-style:italic;
+    font-size:26px;
+    font-weight:700;
+    color:#F5D87A;
+    text-shadow:1px 2px 8px rgba(0,0,0,0.7), 0 0 20px rgba(200,150,30,0.4);
+    z-index:3;
+    letter-spacing:0.02em;
+  }
+
+  /* Play button — centered, white circle */
+  .player-play-btn {
+    position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-60%);
+    background:rgba(255,255,255,0.92);
+    border:none;
+    border-radius:50%;
+    width:52px;height:52px;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    z-index:4;
+    box-shadow:0 2px 12px rgba(0,0,0,0.25);
+    transition:transform 0.2s;
+  }
+  .player-play-btn:hover { transform:translate(-50%,-60%) scale(1.06); }
+  .player-play-btn svg { fill:#333;width:18px;height:18px;margin-left:3px; }
+
+  /* Meta below cover */
+  .player-meta { padding:14px 16px 4px;text-align:center; }
+  .player-meta .song-name { font-family:var(--serif);font-size:17px;font-weight:500;margin-bottom:3px;color:var(--text-primary); }
+  .player-meta .song-dedication { font-size:12px;color:var(--text-muted); }
+
+  /* Progress bar */
+  .player-progress-wrap { padding:10px 16px 14px; }
+  .player-progress-bar {
+    height:3px;background:#E8E2D8;border-radius:2px;
+    cursor:pointer;position:relative;overflow:hidden;margin-bottom:6px;
+  }
+  .player-progress-fill { height:100%;background:#C4962A;border-radius:2px;width:0%;transition:width 0.1s linear; }
+  .player-time-row { display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--text-muted); }
+  .player-replay-btn { background:none;border:none;cursor:pointer;color:var(--text-muted);padding:0;display:flex;align-items:center; }
+  .story-narrative .author-tag {
+    font-size:11px;color:#9B6B9B;
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:20px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    font-weight:500;
+  }
+  .story-narrative .author-tag::before {
+    content:'——';
+    color:#9B6B9B;
+    letter-spacing:-2px;
+    font-size:13px;
+  }
+  .story-narrative .author-tag .a-label { display:none; }
+  .story-narrative .author-tag .sep { display:none; }
+
+  .story-narrative h3 {
+    font-family:var(--serif);
+    font-size:clamp(26px,3.2vw,36px);
+    font-weight:300;
+    line-height:1.2;
+    color:var(--text-primary);
+    margin-bottom:20px;
+    letter-spacing:-0.01em;
+  }
+
+  /* Drop cap on first paragraph */
+  .story-narrative p:first-of-type::first-letter {
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:3.6em;
+    font-weight:400;
+    line-height:0.8;
+    float:left;
+    margin-right:4px;
+    margin-top:6px;
+    color:var(--text-primary);
+  }
+
+  .story-narrative p {
+    font-size:14.5px;
+    color:var(--text-secondary);
+    line-height:1.8;
+    margin-bottom:16px;
+  }
+  .story-blockquote { border-left:3px solid var(--wine);padding-left:16px;margin:20px 0;font-family:var(--serif);font-style:italic;font-size:16px;color:var(--text-primary);line-height:1.6; }
+  .story-stats { display:flex;gap:32px;margin-top:24px;padding-top:24px;border-top:1px solid var(--border); }
+  .stat-num { font-family:var(--serif);font-size:32px;font-weight:400;color:var(--text-primary);line-height:1; }
+  .stat-label { font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);margin-top:4px; }
+
+  /* ===== PURPLE SECTION ===== */
+  .section-purple { background:var(--purple-section);padding:64px 0 56px;overflow:hidden; }
+  .section-purple-inner { padding:0 40px; }
+  .section-purple h2 {
+    font-family:var(--serif);
+    font-size:clamp(28px,4.5vw,48px);
+    font-weight:600;color:#fff;text-align:center;
+    margin-bottom:16px;line-height:1.2;
+  }
+  .section-purple > .section-purple-inner > p {
+    text-align:center;font-size:16px;
+    color:rgba(255,255,255,0.75);
+    margin-bottom:40px;max-width:560px;
+    margin-left:auto;margin-right:auto;line-height:1.7;
+  }
+  .section-purple strong { color:#fff; }
+
+  /* Slider wrap */
+  .reaction-slider-outer {
+    position:relative;
+    width:100%;
+    margin-bottom:36px;
+  }
+  .reaction-slider-track-wrap { overflow:hidden; }
+  .reaction-slider-track {
+    display:flex;
+    gap:12px;
+    transition:transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+    padding:8px 0;
+  }
+
+  /* Each reaction card — portrait tall */
+  .reaction-card {
+    flex:0 0 220px;
+    background:#1A1018;
+    border-radius:16px;
+    overflow:hidden;
+    cursor:pointer;
+    position:relative;
+    transition:transform 0.2s;
+  }
+  .reaction-card:hover { transform:translateY(-3px); }
+
+  /* Video/poster fills full card */
+  .reaction-video-wrap {
+    position:relative;
+    width:100%;
+    aspect-ratio:9/16;
+    overflow:hidden;
+    background:#0D080C;
+  }
+  .reaction-video-el { width:100%;height:100%;object-fit:cover;display:block; }
+  .reaction-poster { position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;transition:opacity 0.3s; }
+  .reaction-poster.hidden { opacity:0;pointer-events:none; }
+  .reaction-poster-bg { position:absolute;inset:0; }
+
+  /* Descriptive text — top white box */
+  .reaction-poster-text {
+    position:relative;z-index:2;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(4px);
+    margin:10px 10px 0;
+    border-radius:10px;
+    padding:10px 12px;
+    font-size:12px;color:#1A1814;
+    line-height:1.5;font-weight:400;
+  }
+
+  /* Play button — centered */
+  .reaction-play-btn {
+    position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    z-index:3;
+    background:rgba(255,255,255,0.88);
+    border-radius:50%;width:44px;height:44px;
+    display:flex;align-items:center;justify-content:center;
+    transition:transform 0.15s,background 0.15s;
+    box-shadow:0 2px 12px rgba(0,0,0,0.3);
+  }
+  .reaction-play-btn:hover { transform:translate(-50%,-50%) scale(1.08);background:#fff; }
+  .reaction-play-btn svg { fill:#1A1814;width:14px;height:14px;margin-left:2px; }
+
+  /* Bottom info — badge + title + sub overlaid on video */
+  .reaction-card-bottom {
+    position:absolute;bottom:0;left:0;right:0;z-index:4;
+    padding:32px 12px 12px;
+    background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 100%);
+  }
+  .reaction-tag {
+    display:inline-block;
+    background:rgba(255,255,255,0.15);
+    border:1px solid rgba(255,255,255,0.25);
+    color:rgba(255,255,255,0.9);
+    font-size:10px;padding:3px 8px;
+    border-radius:6px;margin-bottom:5px;
+    letter-spacing:0.04em;font-weight:500;
+    backdrop-filter:blur(4px);
+  }
+  .reaction-card-title {
+    font-family:var(--serif);font-size:15px;
+    color:#fff;font-weight:400;line-height:1.3;margin-bottom:2px;
+  }
+  .reaction-card-sub { font-size:11px;color:rgba(255,255,255,0.55); }
+
+  /* Prev/Next buttons */
+  .reaction-nav-btn {
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:42px;height:42px;
+    background:rgba(255,255,255,0.92);
+    border:none;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;z-index:10;
+    box-shadow:0 2px 10px rgba(0,0,0,0.25);
+    transition:background 0.2s,transform 0.2s;
+  }
+  .reaction-nav-btn:hover { background:#fff;transform:translateY(-50%) scale(1.06); }
+  .reaction-nav-btn svg { width:16px;height:16px;color:#1A1814; }
+  .reaction-nav-btn.prev { left:16px; }
+  .reaction-nav-btn.next { right:16px; }
+
+  .section-purple .cta-purple-bottom { text-align:center;padding:0 32px; }
+  .cta-purple-bottom .swipe-hint { font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:16px;font-weight:400; }
+  .cta-purple-bottom .cta-purple-main { font-size:16px;color:#fff;line-height:1.6;margin-bottom:22px;max-width:400px;margin-left:auto;margin-right:auto; }
+  .cta-purple-bottom .cta-purple-main strong { font-weight:700;color:#fff; }
+  .btn-purple-cta {
+    display:block;
+    width:100%;max-width:400px;
+    margin:0 auto 14px;
+    background:#fff;
+    color:#1A1814;
+    border:none;
+    border-radius:100px;
+    padding:17px 32px;
+    font-size:16px;font-weight:600;
+    font-family:var(--sans);
+    text-decoration:none;
+    text-align:center;
+    cursor:pointer;
+    transition:opacity 0.2s,transform 0.15s;
+    box-shadow:0 2px 12px rgba(0,0,0,0.15);
+  }
+  .btn-purple-cta:hover { opacity:0.93;transform:translateY(-1px); }
+  .cta-purple-bottom .cta-purple-sub { font-size:13px;color:rgba(255,255,255,0.5);margin-top:2px; }
+
+  /* ===== WHY A SONG ===== */
+  .section-why { background:var(--cream);padding:80px 40px;text-align:center; }
+  .section-why .eyebrow { font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#9B6B9B;font-weight:600;margin-bottom:14px; }
+  .section-why h2 {
+    font-family:var(--serif);
+    font-size:clamp(38px,5.5vw,64px);
+    font-weight:300;
+    color:var(--text-primary);
+    margin-bottom:14px;
+    line-height:1.1;
+    letter-spacing:-0.02em;
+  }
+  .section-why h2 em { font-style:italic;color:#9B6B9B;font-weight:300; }
+  .section-why > p { font-size:15px;color:var(--text-secondary);max-width:560px;margin:0 auto 56px;line-height:1.7; }
+  .comparison-grid { display:grid;grid-template-columns:1fr auto 1fr;gap:24px;max-width:820px;margin:0 auto 40px;align-items:start; }
+  .comparison-card {
+    background:#F2EDE3;
+    border:1.5px solid #1A1814;
+    border-radius:16px;
+    padding:24px;
+    text-align:left;
+    box-shadow:4px 4px 0px 0px #1A1814;
+    transform:rotate(-1.5deg);
+    transition:transform 0.3s ease;
+  }
+  .comparison-card:hover {
+    transform:rotate(0deg);
+  }
+  .comparison-card.winner { border-color:var(--wine);box-shadow:0 0 0 3px rgba(107,45,91,0.08); }
+  .comparison-label {
+    font-size:10px;letter-spacing:0.14em;text-transform:uppercase;
+    color:#9B6B9B;font-weight:600;
+    margin-bottom:8px;display:flex;align-items:center;gap:5px;
+  }
+  .comparison-card h4 {
+    font-family:var(--serif);font-size:26px;font-weight:300;
+    color:var(--text-primary);margin-bottom:6px;
+    letter-spacing:-0.01em;line-height:1.2;
+  }
+  .comparison-item {
+    display:flex;justify-content:space-between;align-items:flex-start;
+    padding:8px 0;font-size:13px;
+    border-bottom:1px dashed #C8C4BC;
+  }
+  .comparison-item .item-name { color:var(--text-primary);font-weight:500; }
+  .comparison-item .item-name.strike { text-decoration:line-through;color:var(--text-secondary); }
+  .comparison-item .item-note { font-size:11px;color:#9B6B9B;font-style:italic;margin-top:2px; }
+  .comparison-item .item-note::before { content:'↳ '; }
+  .comparison-item .item-price { font-size:13px;color:var(--text-primary);font-weight:500;white-space:nowrap;margin-left:12px; }
+  .comparison-total {
+    display:flex;justify-content:space-between;
+    padding:12px 0 6px;font-size:12px;font-weight:600;
+    letter-spacing:0.08em;text-transform:uppercase;color:var(--text-primary);
+    border-top:1px dashed #C8C4BC;margin-top:4px;
+  }
+  .comparison-total span:last-child { font-size:14px; }
+  .vs-circle { width:44px;height:44px;background:var(--cream-dark);border:1.5px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text-muted);font-weight:600;align-self:center;margin-top:60px;flex-shrink:0; }
+  .or-both { font-size:11px;color:var(--text-muted);text-align:center;margin-top:4px;font-style:italic; }
+  .winner-card {
+    background:#fff;
+    border:1.5px solid #1A1814;
+    border-radius:16px;
+    padding:0;
+    text-align:left;
+    position:relative;
+    box-shadow:4px 4px 0px 0px #C0622A;
+    overflow:hidden;
+  }
+  /* THE WINNER triangle badge — top right corner */
+  .winner-badge-triangle {
+    position:absolute;top:0;right:0;z-index:5;
+    width:80px;height:80px;
+    overflow:hidden;pointer-events:none;
+  }
+  .winner-badge-triangle::before {
+    content:'THE WINNER';
+    position:absolute;top:18px;right:-22px;
+    background:var(--wine);
+    color:#fff;
+    font-size:8px;font-weight:700;
+    letter-spacing:0.06em;
+    padding:4px 24px;
+    transform:rotate(45deg);
+    transform-origin:center;
+    white-space:nowrap;
+  }
+  /* Dark header block */
+  .winner-card .player-header {
+    display:flex;align-items:center;gap:12px;
+    padding:16px 16px 14px;
+    background:var(--dark);
+    border-bottom:none;
+    margin-bottom:0;
+  }
+  .player-icon { width:36px;height:36px;background:var(--wine);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+  .player-icon svg { fill:#fff;width:16px;height:16px; }
+  .player-header .song-info .title { font-size:14px;color:#fff;font-weight:500; }
+  .player-header .song-info .sub { font-size:11px;color:#888;letter-spacing:0.06em;text-transform:uppercase; }
+  /* Waveform in dark header */
+  .player-waveform {
+    height:36px;
+    background:repeating-linear-gradient(90deg,#444 0px,#444 2px,transparent 2px,transparent 5px);
+    margin:0 16px 0;
+    padding:0;
+    border-radius:0;
+    position:relative;overflow:hidden;
+    background-color:var(--dark);
+  }
+  .player-waveform::before {
+    content:'';position:absolute;inset:0;
+    background:repeating-linear-gradient(90deg,var(--wine-light) 0px,var(--wine-light) 2px,transparent 2px,transparent 5px);
+    width:45%;
+  }
+  /* White content area */
+  .winner-card-body { padding:16px 18px; }
+  .where-plays-label {
+    font-size:10px;letter-spacing:0.12em;text-transform:uppercase;
+    color:#9B6B9B;font-weight:600;
+    margin-bottom:8px;display:flex;align-items:center;gap:5px;
+  }
+  .where-plays-label::before { content:'♪'; }
+  .where-plays-title {
+    font-family:var(--serif);
+    font-size:clamp(22px,2.5vw,30px);
+    font-weight:300;
+    color:var(--text-primary);
+    margin-bottom:4px;
+    line-height:1.2;
+    letter-spacing:-0.01em;
+  }
+  .where-plays-title em { font-style:italic;color:#9B6B9B; }
+  .where-plays-sub { font-size:12px;color:var(--text-muted);margin-bottom:16px;line-height:1.5; }
+  /* Numbered play items — vertical list */
+  .plays-grid { display:flex;flex-direction:column;gap:0;margin-bottom:14px; }
+  .play-item {
+    display:flex;align-items:baseline;gap:10px;
+    padding:9px 0;
+    border-bottom:1px solid var(--cream-dark);
+    font-size:13px;color:var(--text-primary);
+    line-height:1.3;
+  }
+  .play-item:last-child { border-bottom:none; }
+  .play-item .play-num { font-size:11px;color:var(--text-muted);font-weight:500;flex-shrink:0;min-width:18px; }
+  .play-item strong { color:var(--text-primary);font-weight:400;display:inline;font-family:var(--serif);font-size:14px; }
+  .play-item strong em { font-style:italic;color:#9B6B9B; }
+  .play-item .play-when { font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);display:block;margin-top:1px; }
+  .winner-lifetime {
+    display:flex;justify-content:space-between;align-items:center;
+    padding-top:12px;border-top:1px solid var(--border);
+    font-size:11px;color:var(--text-muted);
+    letter-spacing:0.08em;text-transform:uppercase;
+  }
+  .winner-lifetime .lifetime-val {
+    font-family:var(--serif);font-style:italic;
+    font-size:20px;color:var(--text-primary);
+    text-transform:none;letter-spacing:0;font-weight:300;
+  }
+  .difference-text {
+    font-family:var(--serif);
+    font-style:normal;
+    font-size:clamp(22px,3vw,32px);
+    font-weight:300;
+    text-align:center;
+    color:var(--text-primary);
+    margin:40px auto 28px;
+    max-width:480px;
+    line-height:1.3;
+    letter-spacing:-0.01em;
+  }
+  .difference-text em { color:#9B6B9B;font-style:italic;font-weight:300; }
+  .cta-center { text-align:center;margin-top:0; }
+  .cta-note { display:block;text-align:center;font-size:13px;color:var(--text-muted);margin-top:14px;font-style:normal; }
+
+  /* ===== PAIN POINTS ===== */
+  .section-pain { background:var(--cream);padding:60px 40px 80px; }
+  .section-pain h2 {
+    font-family:var(--serif);
+    font-size:clamp(30px,4vw,46px);
+    font-weight:400;text-align:center;
+    margin-bottom:12px;line-height:1.2;
+  }
+  .section-pain > p {
+    text-align:center;font-size:15px;color:var(--text-secondary);
+    max-width:420px;margin:0 auto 40px;line-height:1.6;
+  }
+  .section-pain > p em { font-style:italic;color:var(--text-primary); }
+  .pain-grid {
+    display:flex;flex-direction:column;
+    gap:12px;
+    max-width:480px;margin:0 auto;
+  }
+  .pain-card {
+    background:#FAFAF8;
+    border:1px solid rgba(0,0,0,0.07);
+    border-radius:14px;
+    padding:16px 18px;
+    display:flex;flex-direction:column;gap:8px;
+    box-shadow:0 1px 6px rgba(0,0,0,0.05);
+  }
+  .pain-card-header {
+    display:flex;align-items:center;gap:12px;
+  }
+  .pain-icon {
+    width:36px;height:36px;flex-shrink:0;
+    background:#EDE9E1;
+    border:none;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:#5A4A3A;
+  }
+  .pain-card h4 { font-size:15px;font-weight:700;color:var(--text-primary);line-height:1.3;margin:0; }
+  .pain-card p { font-size:13.5px;color:var(--text-secondary);line-height:1.6;margin:0;padding-left:48px; }
+
+  /* ===== WHAT IF ===== */
+  .section-whatif { background:var(--cream);padding:70px 40px;text-align:center;border-top:1px solid var(--border); }
+  .section-whatif .eyebrow {
+    font-size:11px;letter-spacing:0.14em;text-transform:uppercase;
+    color:#9B6B9B;font-weight:600;
+    margin-bottom:20px;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .section-whatif .eyebrow::before { content:'✦';color:#9B6B9B;font-size:13px; }
+  .section-whatif h2 {
+    font-family:var(--sans);
+    font-size:clamp(24px,3.5vw,36px);
+    font-weight:400;
+    max-width:560px;margin:0 auto 20px;
+    line-height:1.35;
+    color:var(--text-primary);
+    letter-spacing:-0.01em;
+  }
+  .section-whatif h2 em { color:#9B6B9B;font-style:normal;font-weight:400; }
+  .section-whatif > p {
+    font-size:15px;color:var(--text-secondary);
+    max-width:420px;margin:0 auto 40px;line-height:1.75;
+  }
+  .section-whatif > p strong { font-weight:700;color:var(--text-primary); }
+  .review-card-featured { background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:28px 32px;max-width:660px;margin:0 auto;text-align:left; }
+  .review-stars { margin-bottom:14px; }
+  .review-stars span { color:var(--gold);font-size:18px; }
+  .review-text { font-size:15px;color:var(--text-primary);line-height:1.75;margin-bottom:20px;font-style:italic;font-family:var(--serif); }
+  .reviewer { display:flex;align-items:center;gap:12px; }
+  .reviewer-avatar { width:40px;height:40px;border-radius:50%;background:var(--dark);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:600;flex-shrink:0; }
+  .reviewer-name { font-size:14px;font-weight:600; }
+  .reviewer-meta { font-size:12px;color:var(--text-muted); }
+
+  /* ===== OCCASIONS ===== */
+  .section-occasions { background:var(--cream);padding:70px 40px;border-top:1px solid var(--border); }
+  .section-occasions h2 {
+    font-family:var(--sans);
+    font-size:clamp(26px,3.8vw,40px);
+    font-weight:700;text-align:center;
+    margin-bottom:10px;line-height:1.2;
+    color:var(--text-primary);
+  }
+  .section-occasions > p { text-align:center;font-size:15px;color:var(--text-secondary);margin-bottom:40px;max-width:400px;margin-left:auto;margin-right:auto; }
+  .occasions-grid {
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:0;
+    max-width:600px;margin:0 auto 40px;
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+    background:#fff;
+  }
+  .occasion-card {
+    padding:28px 24px;
+    text-align:center;
+    background:#fff;
+    border-right:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    position:relative;
+  }
+  .occasion-card:nth-child(even) { border-right:none; }
+  .occasion-card:nth-last-child(1),
+  .occasion-card:nth-last-child(2) { border-bottom:none; }
+  .occasion-icon {
+    width:44px;height:44px;
+    background:#EDE9E1;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 14px;
+    color:#5A4A3A;
+    font-size:0; /* hide emoji text */
+  }
+  .occasion-icon svg { width:18px;height:18px;flex-shrink:0; }
+  .occasion-card h4 { font-size:14px;font-weight:700;margin-bottom:8px;color:var(--text-primary); }
+  .occasion-card p { font-size:13px;color:var(--text-secondary);line-height:1.55;margin-bottom:8px; }
+  .occasion-card .occasion-tags { font-size:12px;color:var(--text-muted);font-style:italic; }
+  .occasions-cta-note { text-align:center;font-size:14px;color:var(--text-secondary);margin-bottom:16px; }
+  .occasions-cta-note strong { font-weight:600; }
+
+  /* ===== THEMES / PRODUCT DEMO ===== */
+  .section-themes { background:var(--cream);padding:60px 40px 72px;border-top:1px solid var(--border); }
+  .themes-header { text-align:center;margin-bottom:28px; }
+  .themes-plus { font-size:15px;color:var(--text-secondary);margin-bottom:4px; }
+  .themes-plus strong { color:var(--text-primary);font-weight:700; }
+  .themes-sub { font-size:13px;color:var(--text-muted); }
+
+  .themes-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    max-width:600px;
+    margin:0 auto;
+  }
+  .theme-card {
+    position:relative;
+    border-radius:14px;
+    overflow:hidden;
+    aspect-ratio:3/2;
+    background-size:cover;
+    background-position:center;
+    cursor:pointer;
+    transition:transform 0.2s;
+  }
+  .theme-card:hover { transform:scale(1.02); }
+  .theme-overlay {
+    position:absolute;inset:0;
+    background:linear-gradient(160deg,rgba(30,20,10,0.35) 0%,rgba(10,5,2,0.65) 100%);
+  }
+  .theme-text {
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    padding:16px;text-align:center;
+    z-index:2;
+  }
+  .theme-title {
+    font-family:var(--serif);
+    font-size:18px;font-weight:400;
+    color:#fff;
+    line-height:1.2;margin-bottom:5px;
+    text-shadow:0 1px 6px rgba(0,0,0,0.4);
+  }
+  .theme-sub {
+    font-size:12px;color:rgba(255,255,255,0.78);
+    line-height:1.4;
+    text-shadow:0 1px 4px rgba(0,0,0,0.4);
+  }
+  @media(max-width:600px){
+    .themes-grid { grid-template-columns:1fr 1fr;gap:8px; }
+    .theme-title { font-size:15px; }
+    .section-themes { padding:50px 16px; }
+  }
+
+  /* ===== EVERYTHING YOU GET ===== */
+  .section-everything {
+    background:var(--cream);
+    padding:60px 40px 72px;
+    border-top:1px solid var(--border);
+  }
+  .everything-title {
+    font-family:var(--serif);
+    font-size:clamp(28px,4vw,42px);
+    font-weight:400;
+    text-align:center;
+    color:var(--text-primary);
+    margin-bottom:10px;
+    letter-spacing:-0.01em;
+  }
+  .everything-sub {
+    text-align:center;
+    font-size:15px;
+    color:var(--text-secondary);
+    margin-bottom:36px;
+    font-weight:400;
+  }
+  .everything-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    max-width:560px;
+    margin:0 auto;
+  }
+  .everything-card {
+    background:#fff;
+    border:1px solid rgba(0,0,0,0.07);
+    border-radius:16px;
+    padding:18px 18px 20px;
+    box-shadow:0 1px 8px rgba(0,0,0,0.05);
+  }
+  .everything-card-header {
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:12px;
+  }
+  .everything-icon {
+    width:34px;height:34px;flex-shrink:0;
+    background:#F0EAF5;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:#9B6B9B;
+  }
+  .everything-icon svg { width:15px;height:15px; }
+  .everything-label {
+    font-size:13px;font-weight:600;
+    color:var(--text-primary);
+    line-height:1.3;
+  }
+  .everything-card p {
+    font-size:13px;color:var(--text-secondary);
+    line-height:1.65;
+  }
+  @media(max-width:600px){
+    .everything-grid { grid-template-columns:1fr 1fr;gap:8px; }
+    .section-everything { padding:50px 16px; }
+  }
+
+  /* ===== FIXED BOTTOM CTA ===== */
+  .fixed-cta {
+    position:fixed;
+    bottom:0;left:0;right:0;
+    z-index:9999;
+    background:#fff;
+    padding:12px 16px;
+    padding-bottom:calc(12px + env(safe-area-inset-bottom));
+    box-shadow:0 -2px 20px rgba(0,0,0,0.12);
+    display:none;
+  }
+  .fixed-cta.visible { display:block; }
+  .fixed-cta-btn {
+    display:block;
+    width:100%;
+    background:var(--wine);
+    color:#fff;
+    text-align:center;
+    text-decoration:none;
+    font-size:17px;font-weight:700;
+    font-family:var(--sans);
+    padding:18px 24px;
+    border-radius:12px;
+    box-shadow:0 2px 16px rgba(107,45,91,0.35);
+    touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .fixed-cta-btn:active { opacity:0.88; }
+  @media(min-width:901px){ .fixed-cta { display:none !important; } }
+
+  /* ===== FINAL CTA ===== */
+  .section-final-cta {
+    background:var(--cream);
+    padding:80px 40px 90px;
+    text-align:center;
+    border-top:1px solid var(--border);
+  }
+  .final-cta-title {
+    font-family:var(--serif);
+    font-size:clamp(32px,5vw,56px);
+    font-weight:300;
+    color:var(--text-primary);
+    margin-bottom:18px;
+    line-height:1.15;
+    letter-spacing:-0.01em;
+    max-width:600px;
+    margin-left:auto;margin-right:auto;
+  }
+  .final-cta-sub {
+    font-size:16px;color:var(--text-secondary);
+    max-width:520px;margin:0 auto 36px;
+    line-height:1.7;
+  }
+  .final-cta-badges {
+    display:flex;align-items:center;justify-content:center;
+    gap:28px;margin-top:20px;flex-wrap:wrap;
+  }
+  .final-cta-badge {
+    display:flex;align-items:center;gap:7px;
+    font-size:13px;color:var(--text-muted);font-weight:500;
+  }
+  .final-cta-badge svg { width:15px;height:15px;flex-shrink:0; }
+  @media(max-width:600px){
+    .section-final-cta { padding:60px 24px 70px; }
+    .final-cta-badges { gap:16px; }
+  }
+
+  /* ===== FAQ ===== */
+  .section-faq { background:#fff;padding:72px 40px 80px;border-top:1px solid var(--border); }
+  .faq-title {
+    font-family:var(--serif);
+    font-size:clamp(28px,4vw,44px);
+    font-weight:400;
+    color:var(--text-primary);
+    margin-bottom:12px;
+    line-height:1.15;
+    letter-spacing:-0.01em;
+  }
+  .faq-sub {
+    font-size:15px;color:var(--text-secondary);
+    margin-bottom:48px;max-width:420px;line-height:1.6;
+  }
+  .faq-list { max-width:640px; }
+  .faq-item {
+    border-bottom:1px solid var(--border);
+  }
+  .faq-item:first-child { border-top:1px solid var(--border); }
+  .faq-question {
+    width:100%;display:flex;align-items:center;justify-content:space-between;
+    gap:16px;
+    background:none;border:none;cursor:pointer;
+    padding:20px 0;
+    text-align:left;
+    font-family:var(--sans);font-size:15px;font-weight:500;
+    color:var(--text-primary);
+    line-height:1.4;
+  }
+  .faq-question:hover { color:var(--wine); }
+  .faq-chevron {
+    width:18px;height:18px;flex-shrink:0;
+    color:var(--text-muted);
+    transition:transform 0.25s ease;
+  }
+  .faq-item.open .faq-chevron { transform:rotate(180deg); }
+  .faq-answer {
+    overflow:hidden;
+    max-height:0;
+    transition:max-height 0.35s ease, padding 0.25s ease;
+    padding:0;
+  }
+  .faq-item.open .faq-answer {
+    max-height:300px;
+    padding-bottom:18px;
+  }
+  .faq-answer p {
+    font-size:14px;color:var(--text-secondary);
+    line-height:1.75;
+  }
+  @media(max-width:600px){
+    .section-faq { padding:50px 20px; }
+    .faq-title { font-size:28px; }
+  }
+
+  /* ===== PACKAGE CARD ===== */
+  .package-card {
+    max-width:560px;margin:20px auto 0;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:24px 24px 20px;
+    box-shadow:0 2px 16px rgba(0,0,0,0.07);
+  }
+  .package-top { text-align:center;margin-bottom:16px; }
+  .package-title { font-family:var(--sans);font-size:15px;font-weight:600;color:var(--text-primary);margin-bottom:4px; }
+  .package-sub { font-size:13px;color:var(--text-muted); }
+  .package-divider { border:none;border-top:1px solid var(--border);margin:0 0 16px; }
+  .package-includes { font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:12px; }
+  .package-list { list-style:none;display:flex;flex-direction:column;gap:10px; }
+  .package-list li { display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--text-secondary);line-height:1.45; }
+  .check { color:var(--trustpilot-green);font-size:14px;font-weight:700;flex-shrink:0;margin-top:1px; }
+  .package-guarantee { text-align:center;font-size:12px;color:var(--text-muted);margin-top:12px;line-height:1.4; }
+
+  /* ===== ARTIST NOTE ===== */
+  .section-artist {
+    background:var(--cream);
+    padding:20px 40px 72px;
+  }
+  .artist-card {
+    background:#fff;
+    border-radius:20px;
+    padding:28px 28px 24px;
+    max-width:560px;
+    margin:0 auto;
+    box-shadow:0 4px 32px rgba(0,0,0,0.08), 0 1px 6px rgba(0,0,0,0.04);
+  }
+  .artist-card-header {
+    display:flex;align-items:flex-start;gap:14px;
+    margin-bottom:20px;
+  }
+  .artist-avatar {
+    width:48px;height:48px;flex-shrink:0;
+    border-radius:50%;overflow:hidden;
+    background:linear-gradient(135deg,#C4962A,#8B6914);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .artist-avatar img { width:100%;height:100%;object-fit:cover;border-radius:50%; }
+  .artist-card-label {
+    display:flex;flex-direction:column;gap:3px;padding-top:2px;
+  }
+  .artist-eyebrow {
+    font-size:10px;letter-spacing:0.1em;text-transform:uppercase;
+    color:#9B6B9B;font-weight:600;line-height:1.4;
+  }
+  .artist-name {
+    font-family:var(--serif);font-size:18px;font-weight:400;
+    color:var(--text-primary);
+  }
+  .artist-quote p {
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:15px;
+    color:var(--text-primary);
+    line-height:1.8;
+    margin-bottom:14px;
+  }
+  .artist-quote p:last-child { margin-bottom:0; }
+  .artist-footer {
+    display:flex;align-items:center;gap:8px;
+    margin-top:22px;
+    padding-top:18px;
+    border-top:1px solid var(--border);
+    font-size:12px;color:var(--text-muted);
+    line-height:1.4;
+  }
+  .artist-footer svg { flex-shrink:0;color:var(--text-muted); }
+
+  /* ===== THEME MODAL ===== */
+  .theme-modal-backdrop {
+    position:fixed;inset:0;z-index:1000;
+    background:rgba(10,5,2,0.55);
+    backdrop-filter:blur(4px);
+    display:flex;align-items:flex-end;justify-content:center;
+    opacity:0;pointer-events:none;
+    transition:opacity 0.3s ease;
+  }
+  .theme-modal-backdrop.open {
+    opacity:1;pointer-events:all;
+  }
+  .theme-modal {
+    background:#fff;
+    border-radius:24px 24px 0 0;
+    width:100%;max-width:480px;
+    padding:0 28px 36px;
+    position:relative;
+    transform:translateY(40px);
+    transition:transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    max-height:90vh;overflow-y:auto;
+  }
+  .theme-modal-backdrop.open .theme-modal {
+    transform:translateY(0);
+  }
+
+  /* Close button */
+  .theme-modal-close {
+    position:absolute;top:18px;right:20px;
+    width:32px;height:32px;
+    background:var(--cream-dark);border:none;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:16px;color:var(--text-muted);
+    transition:background 0.2s;z-index:2;
+  }
+  .theme-modal-close:hover { background:var(--border); }
+
+  /* Polaroid photos stack */
+  .theme-modal-photos {
+    display:flex;align-items:flex-end;
+    gap:0;margin-bottom:20px;
+    padding-top:28px;
+    height:100px;
+    position:relative;
+  }
+  .modal-photo {
+    width:72px;height:80px;
+    border-radius:6px;
+    overflow:hidden;
+    background:#C4962A;
+    position:absolute;
+    box-shadow:0 3px 12px rgba(0,0,0,0.15);
+    border:3px solid #fff;
+  }
+  .modal-photo img { width:100%;height:100%;object-fit:cover; }
+  .modal-photo:nth-child(1) { left:0;bottom:0;transform:rotate(-12deg);z-index:1;background:#8B6914; }
+  .modal-photo:nth-child(2) { left:40px;bottom:8px;transform:rotate(-4deg);z-index:2;background:#A07820; }
+  .modal-photo:nth-child(3) { left:82px;bottom:14px;transform:rotate(5deg);z-index:3;background:#6B8050; }
+  .modal-photo-label {
+    position:absolute;bottom:4px;left:50%;transform:translateX(-50%);
+    font-size:9px;color:rgba(0,0,0,0.5);font-style:italic;white-space:nowrap;
+    font-family:var(--serif);
+  }
+
+  /* Music icon circle */
+  .modal-music-icon {
+    width:56px;height:56px;
+    background:#F0EAF5;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 18px;
+  }
+  .modal-music-icon svg { width:24px;height:24px;color:#9B6B9B; }
+
+  /* Modal content */
+  .theme-modal h3 {
+    font-family:var(--serif);
+    font-size:24px;font-weight:400;
+    color:var(--text-primary);
+    text-align:center;
+    line-height:1.25;
+    margin-bottom:14px;
+  }
+  .theme-modal p {
+    font-size:14px;color:var(--text-secondary);
+    text-align:center;line-height:1.7;
+    margin-bottom:24px;
+    max-width:320px;margin-left:auto;margin-right:auto;
+  }
+  .theme-modal .btn-modal-cta {
+    display:block;width:100%;
+    background:var(--wine);color:#fff;
+    border:none;border-radius:12px;
+    padding:17px 24px;
+    font-size:16px;font-weight:700;
+    font-family:var(--sans);
+    text-align:center;text-decoration:none;
+    cursor:pointer;
+    transition:background 0.2s;
+    margin-bottom:12px;
+  }
+  .theme-modal .btn-modal-cta:hover { background:var(--wine-hover); }
+  .theme-modal .modal-guarantee {
+    text-align:center;font-size:12px;color:var(--text-muted);
+  }
+
+  /* ===== REVIEWS ===== */
+  .section-reviews { background:#fff;padding:70px 0 60px;border-top:1px solid var(--border);overflow:hidden; }
+  .section-reviews-inner { padding:0 40px; }
+
+  /* Trustpilot pill header */
+  .trustpilot-header {
+    display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+  }
+  .tp-pill {
+    display:inline-flex;align-items:center;gap:8px;
+    border:1.5px solid var(--border);border-radius:100px;
+    padding:7px 16px;
+    background:#fff;
+  }
+  .tp-pill-stars { display:flex;gap:2px; }
+  .tp-pill-stars span {
+    display:inline-flex;align-items:center;justify-content:center;
+    width:18px;height:18px;
+    background:var(--trustpilot-green);
+    border-radius:2px;
+  }
+  .tp-pill-stars span svg { width:11px;height:11px;fill:#fff; }
+  .tp-pill-rating { font-size:14px;font-weight:700;color:var(--text-primary); }
+  .tp-pill-logo { display:flex;align-items:center;gap:4px;font-size:13px;color:var(--text-secondary);font-weight:500; }
+  .tp-pill-logo svg { width:16px;height:16px;fill:var(--trustpilot-green); }
+
+  .section-reviews h2 {
+    font-family:var(--serif);font-size:clamp(26px,3.5vw,42px);
+    font-weight:400;text-align:center;margin-bottom:8px;
+    color:var(--text-primary);
+  }
+  .section-reviews > .section-reviews-inner > p {
+    text-align:center;font-size:15px;color:var(--text-secondary);margin-bottom:36px;
+  }
+
+  /* Reviews slider */
+  .reviews-slider-outer { position:relative;width:100%; }
+  .reviews-slider-wrap { overflow:hidden; }
+  .reviews-slider-track {
+    display:flex;gap:14px;
+    transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+    padding:4px 40px 8px;
+  }
+
+  /* Review card */
+  .review-card {
+    flex:0 0 300px;
+    background:#F5F0E8;
+    border:none;
+    border-radius:14px;
+    padding:22px 22px;
+    position:relative;
+    box-shadow:0 1px 6px rgba(0,0,0,0.06);
+  }
+  .review-card.cta-card {
+    display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;
+    background:#fff;
+    border:1.5px solid var(--border);
+  }
+
+  /* TP logo in card — square green + star */
+  .tp-row { display:flex;align-items:center;justify-content:space-between;margin-bottom:12px; }
+  .tp-stars { display:flex;gap:2px; }
+  .tp-stars span {
+    display:inline-flex;align-items:center;justify-content:center;
+    width:16px;height:16px;
+    background:var(--trustpilot-green);border-radius:2px;
+  }
+  .tp-stars span::before { content:'★';font-size:10px;color:#fff;line-height:1; }
+  .tp-logo { display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text-muted);font-weight:500; }
+  .tp-logo-star {
+    width:14px;height:14px;
+    background:var(--trustpilot-green);border-radius:2px;
+    display:inline-flex;align-items:center;justify-content:center;
+    color:#fff;font-size:9px;
+  }
+
+  .review-card h4 { font-size:14px;font-weight:700;margin-bottom:8px;line-height:1.35;color:var(--text-primary); }
+  .review-card .review-body { font-size:13px;color:var(--text-secondary);line-height:1.65;margin-bottom:16px; }
+  .review-card .reviewer-info { display:flex;align-items:center;gap:10px; }
+  .reviewer-avatar.sm { width:32px;height:32px;font-size:12px; }
+  .reviewer-name-sm { font-size:13px;font-weight:600; }
+  .reviewer-date { font-size:11px;color:var(--text-muted); }
+
+  /* CTA card */
+  .cta-card .music-icon { width:44px;height:44px;background:var(--cream-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px; }
+  .cta-card h4 { font-size:15px;font-weight:600;margin-bottom:6px; }
+  .cta-card p { font-size:13px;color:var(--text-secondary);margin-bottom:14px; }
+
+  /* Slider nav buttons */
+  .reviews-nav-btn {
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:40px;height:40px;
+    background:#fff;border:1.5px solid var(--border);
+    border-radius:50%;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;z-index:10;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    transition:box-shadow 0.2s;
+  }
+  .reviews-nav-btn:hover { box-shadow:0 4px 16px rgba(0,0,0,0.14); }
+  .reviews-nav-btn svg { width:16px;height:16px;color:var(--text-primary); }
+  .reviews-nav-btn.prev { left:12px; }
+  .reviews-nav-btn.next { right:12px; }
+
+  .see-all-link { display:block;text-align:center;color:var(--wine);text-decoration:none;font-size:14px;font-weight:500;margin-top:24px; }
+  .see-all-link:hover { text-decoration:underline; }
+
+  /* ===== FOOTER ===== */
+  .footer { background:var(--dark);color:rgba(255,255,255,0.6);padding:40px;text-align:center;font-size:13px; }
+  .footer a { color:rgba(255,255,255,0.5);text-decoration:none; }
+  .footer a:hover { color:#fff; }
+  .footer-links { display:flex;justify-content:center;gap:24px;margin-top:12px;flex-wrap:wrap; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:900px) {
+    .navbar { padding:12px 20px; }
+    .navbar-links { display:none; }
+    .hamburger { display:flex; }
+    .hero { grid-template-columns:1fr;padding:40px 20px;gap:32px; }
+    .hero h1 { font-size:38px; }
+    .hero-right { order:-1; }
+    .steps-grid { grid-template-columns:1fr 1fr; }
+
+    .occasions-grid { grid-template-columns:1fr 1fr; }
+
+    .comparison-grid { grid-template-columns:1fr; }
+    .vs-circle,.or-both { display:none; }
+    .story-split { grid-template-columns:1fr;gap:20px; }
+    .story-card { grid-template-columns:1fr; }
+    .song-player-mock { max-width:240px;margin:0 auto; }
+    .plays-grid { grid-template-columns:1fr; }
+    .story-stats { gap:20px; }
+  }
+  @media (max-width:600px) {
+    .section-light,.section-story,.section-why,.section-pain,.section-whatif,.section-occasions,.section-reviews { padding:50px 20px; }
+    .section-dark,.section-question,.section-purple { padding:50px 16px; }
+    .hero h1 { font-size:32px; }
+    .hero-ctas { flex-direction:column; }
+    .btn-primary,.btn-secondary { width:100%;justify-content:center; }
+    .steps-grid { grid-template-columns:1fr; }
+
+    .occasions-grid { grid-template-columns:1fr 1fr; }
+
+    .reviews-grid { grid-template-columns:1fr; }
+    .carousel-btn { display:none; }
+    .footer { padding:30px 20px; }
+    .footer-links { flex-direction:column;gap:12px;align-items:center; }
+    .story-stats { flex-wrap:wrap; }
+    .announcement-bar { font-size:12px;gap:6px; }
+  }
+</style>
+</head>
+<body>
+
+<!--
+=============================================================
+  CONFIGURATION DES ASSETS — CLOUDFLARE R2
+  Remplacez les URLs ci-dessous par vos vraies URLs R2.
+  Format typique: https://pub-XXXX.r2.dev/votre-fichier.mp4
+=============================================================
+-->
+<!-- HLS.js para Cloudflare Stream -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js"></script>
+<script>
+/* HLS loader helper */
+function loadHLS(videoEl, src){
+  if(!src) return;
+  if(!src.includes('.m3u8')){ videoEl.src = src; return; }
+  if(Hls.isSupported()){
+    const hls = new Hls({ autoStartLoad:false, startLevel:-1, maxBufferLength:20 });
+    hls.loadSource(src);
+    hls.attachMedia(videoEl);
+    videoEl._hls = hls;
+    const origPlay = videoEl.play.bind(videoEl);
+    videoEl.play = function(){
+      if(!videoEl._hlsStarted){ hls.startLoad(); videoEl._hlsStarted=true; }
+      return origPlay();
+    };
+  } else if(videoEl.canPlayType('application/vnd.apple.mpegurl')){
+    videoEl.src = src; // Safari nativo
+  }
+}
+</script>
+<script>
+const R2 = {
+  // Vidéo hero — Section 2
+  hero: 'images/video1.mp4',
+
+  // Vidéos carrossel dark — Section 3 (v1 à v5)
+  carousel: [
+    'https://customer-arbgnhbbnubqm6hq.cloudflarestream.com/e534c5351081faa9f9df212d193f404b/manifest/video.m3u8',
+    'https://customer-arbgnhbbnubqm6hq.cloudflarestream.com/8cd73174be2d35807817eb057af71223/manifest/video.m3u8',
+    'https://customer-arbgnhbbnubqm6hq.cloudflarestream.com/24816044b06f2f6621bfe61f78d330dd/manifest/video.m3u8',
+    'https://customer-arbgnhbbnubqm6hq.cloudflarestream.com/243113dfe2759934f21a7fe894ecb48f/manifest/video.m3u8',
+    'https://customer-arbgnhbbnubqm6hq.cloudflarestream.com/bf856ac818df54a186d5de829f6fd321/manifest/video.m3u8',
+  ],
+
+  // Vidéos section violette — (v6 à v10)
+  reactions: [
+    'https://customer-arbgnhbbnubqm6hq.cloudflarestream.com/984edac56d67d2017bd9d557faa9709d/manifest/video.m3u8',
+    'https://customer-arbgnhbbnubqm6hq.cloudflarestream.com/4fef695924e490b8504773968addbccf/manifest/video.m3u8',
+    'https://customer-arbgnhbbnubqm6hq.cloudflarestream.com/e5b5c9692e469afd0344771217c5523d/manifest/video.m3u8',
+    'https://customer-arbgnhbbnubqm6hq.cloudflarestream.com/5f4b2b6dc6ef72edc03f94c0301508da/manifest/video.m3u8',
+    'https://customer-arbgnhbbnubqm6hq.cloudflarestream.com/162e1205876ea8eba0b14cd96f26167c/manifest/video.m3u8',
+  ],
+
+  // Audio player story
+  storySong: 'images/song.mp3',
+
+  // Posters (optionnel)
+  carouselPosters: [],
+};
+</script>
+
+<!-- TOP BAR — gradient dark -->
+<div class="top-bar">
+  <span class="top-bar-text"><em>Les Soldes Fête des Pères Se Terminent Bientôt !</em> &nbsp;—&nbsp; <a href="#" class="top-bar-link">Commencer Maintenant →</a></span>
+</div>
+
+<!-- DISCOUNT BAR -->
+<div class="discount-bar">
+  <span class="discount-text">Instant <strong>50% de réduction</strong> — Remise</span>
+  <span class="discount-badge">
+    Appliquée
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#00B67A"/><polyline points="8,12 11,15 16,9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </span>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a class="navbar-logo" href="#">
+    <img src="images/logo.png" alt="DivineSong" style="height:28px;width:auto;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <span style="display:none;align-items:center;gap:8px;">
+      <svg viewBox="0 0 28 18" fill="none" width="28" height="18">
+        <ellipse cx="9" cy="9" rx="9" ry="9" fill="#1A1814" opacity="0.15"/>
+        <ellipse cx="19" cy="9" rx="9" ry="9" fill="#1A1814" opacity="0.15"/>
+        <ellipse cx="14" cy="9" rx="5" ry="7" fill="#1A1814" opacity="0.3"/>
+      </svg>
+      <span style="font-family:var(--sans);font-size:15px;font-weight:500;">DivineSong</span>
+    </span>
+  </a>
+  <ul class="navbar-links">
+    <li><a href="#">Comment Ça Marche</a></li>
+    <li><a href="#"><span class="star">★</span> Avis</a></li>
+    <li><a href="#">Suivre Ma Commande</a></li>
+    <li><a href="#">Mon Compte</a></li>
+  </ul>
+  <div class="hamburger" role="button" aria-label="Menu"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<div style="background:var(--cream);width:100%;">
+<section class="hero">
+  <div class="hero-left">
+    <!-- Eyebrow -->
+    <p class="hero-eyebrow">CHANSONS ARTISANALES POUR LES GRANDS MOMENTS DE LA VIE</p>
+
+    <!-- Headline -->
+    <h1>Surprenez Votre Proche avec une Chanson Personnalisée Qu'ils N'oublieront Jamais</h1>
+
+    <!-- CTA principal -->
+    <div class="hero-ctas">
+      <a href="#" class="btn-primary" style="width:100%;justify-content:center;font-size:15px;padding:18px 24px;border-radius:12px;white-space:nowrap;">Commencer Ma Chanson Personnalisée</a>
+    </div>
+
+    <!-- Sous-texte -->
+    <p class="hero-craft-note">Créée avec Amour &amp; Livrée avec Soin</p>
+
+    <!-- Trustpilot avec mini photos -->
+    <div class="hero-tp-row">
+      <div class="hero-tp-avatars">
+        <img src="images/depo.png" alt="" class="tp-mini-avatar">
+        <img src="images/depo2.png" alt="" class="tp-mini-avatar">
+        <div class="tp-mini-avatar tp-mini-placeholder">+</div>
+      </div>
+      <div class="hero-tp-info">
+        <div class="hero-tp-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          <span class="hero-tp-rating">4.9</span>
+        </div>
+        <div class="hero-tp-text">Noté <strong style="color:var(--trustpilot-green);">Excellent</strong> sur Trustpilot</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-video-wrap" id="heroWrap">
+      <video
+        id="heroVideo"
+        class="hero-video-el"
+        playsinline
+        autoplay
+        muted
+        loop
+        preload="metadata"
+      ></video>
+      <div class="hero-video-poster" id="heroPoster">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#2D2420 0%,#1A1210 60%,#0D0A08 100%);"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 35% 60%,rgba(80,50,30,0.5) 0%,transparent 50%);"></div>
+      </div>
+      <div class="hero-play-overlay hidden" id="heroPlayOverlay">
+        <div class="hero-play-big" id="heroPlayBig">
+          <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+      </div>
+      <div class="hero-video-controls">
+        <span class="hero-vid-label">Réactions Authentiques des Clients</span>
+        <div class="hero-vid-btns">
+          <button class="vid-ctrl-btn" id="heroMuteBtn" title="Activer le son" aria-label="Muet">
+            <svg id="heroMuteIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
+            </svg>
+            <svg id="heroUnmuteIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
+              <polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+            </svg>
+          </button>
+          <button class="vid-ctrl-btn" id="heroPlayBtn" title="Lecture/Pause" aria-label="Lecture">
+            <svg id="heroPauseIcon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            <svg id="heroPlayIcon" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <p class="hero-video-caption">Créez un moment qu'ils chériront pour toujours</p>
+  </div>
+</section>
+</div><!-- /hero cream wrapper -->
+
+<!-- DARK — REAL REACTIONS CAROUSEL -->
+<section class="section-dark">
+  <div class="section-dark-inner">
+    <span class="section-label">VRAIES RÉACTIONS</span>
+    <h2>C'est le cadeau qui révèle les vraies émotions</h2>
+    <p>Voyez ce qui se passe quand quelqu'un entend une chanson créée à partir de sa propre histoire, ses souvenirs, et son amour.</p>
+  </div>
+
+  <div class="carousel-outer">
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="carouselTrack">
+
+        <!-- Card 1 — Side -->
+        <div class="carousel-card" data-index="0">
+          <div class="card-video-wrap">
+            <video class="card-video-el" playsinline muted preload="none" loop></video>
+            <div class="card-video-poster">
+              <div class="card-video-poster-bg"></div>
+              <div class="card-video-poster-icon">👤</div>
+            </div>
+            <div class="card-play-overlay">
+              <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+            </div>
+            <div class="card-video-controls">
+              <button class="card-mute-btn" title="Muet">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              </button>
+              <div class="card-progress-wrap"><div class="card-progress-bg"><div class="card-progress-fill"></div></div></div>
+            </div>
+            <div class="card-bottom-bar">
+              <div class="card-side-label">Une Chanson pour Élisabeth</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 — Side -->
+        <div class="carousel-card" data-index="1">
+          <div class="card-video-wrap">
+            <video class="card-video-el" playsinline muted preload="none" loop></video>
+            <div class="card-video-poster">
+              <div class="card-video-poster-bg" style="background:linear-gradient(150deg,#1F1A10 0%,#4A3520 100%);"></div>
+              <div class="card-video-poster-icon">👥</div>
+            </div>
+            <div class="card-play-overlay">
+              <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+            </div>
+            <div class="card-video-controls">
+              <button class="card-mute-btn" title="Muet">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              </button>
+              <div class="card-progress-wrap"><div class="card-progress-bg"><div class="card-progress-fill"></div></div></div>
+            </div>
+            <div class="card-bottom-bar">
+              <div class="card-side-label">Celui Qui Me Fait Rire</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 — CENTRE (featured) -->
+        <div class="carousel-card center-card" data-index="2">
+          <!-- Badge "Activer le son" — top center, white pill -->
+          <div class="center-card-overlay" id="centerAudioBadge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+            Activer le son
+          </div>
+          <div class="card-video-wrap">
+            <video class="card-video-el" playsinline muted preload="none" loop></video>
+            <div class="card-video-poster">
+              <div class="card-video-poster-bg" style="background:linear-gradient(150deg,#1A1810 0%,#3A3020 100%);"></div>
+              <div class="card-video-poster-icon">🎵</div>
+            </div>
+            <div class="card-play-overlay">
+              <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+            </div>
+            <div class="card-video-controls">
+              <button class="card-mute-btn" title="Muet">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              </button>
+              <div class="card-progress-wrap"><div class="card-progress-bg"><div class="card-progress-fill"></div></div></div>
+            </div>
+            <!-- Rich bottom bar (center only) -->
+            <div class="card-bottom-bar">
+              <div class="card-center-bar">
+                <div class="bar-info">
+                  <div class="bar-title">Sous les Mêmes Étoiles</div>
+<div class="bar-progress"><div class="bar-progress-fill" id="centerBarProgress"></div></div>
+                </div>
+                <div class="bar-play-btn" id="centerBarPlayBtn">
+                  <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 — Side -->
+        <div class="carousel-card" data-index="3">
+          <div class="card-video-wrap">
+            <video class="card-video-el" playsinline muted preload="none" loop></video>
+            <div class="card-video-poster">
+              <div class="card-video-poster-bg" style="background:linear-gradient(150deg,#101A18 0%,#203530 100%);"></div>
+              <div class="card-video-poster-icon">💑</div>
+            </div>
+            <div class="card-play-overlay">
+              <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+            </div>
+            <div class="card-video-controls">
+              <button class="card-mute-btn" title="Muet">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              </button>
+              <div class="card-progress-wrap"><div class="card-progress-bg"><div class="card-progress-fill"></div></div></div>
+            </div>
+            <div class="card-bottom-bar">
+              <div class="card-side-label">Tour à Tour · Forever</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 — Side -->
+        <div class="carousel-card" data-index="4">
+          <div class="card-video-wrap">
+            <video class="card-video-el" playsinline muted preload="none" loop></video>
+            <div class="card-video-poster">
+              <div class="card-video-poster-bg" style="background:linear-gradient(150deg,#181018 0%,#352030 100%);"></div>
+              <div class="card-video-poster-icon">👵</div>
+            </div>
+            <div class="card-play-overlay">
+              <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+            </div>
+            <div class="card-video-controls">
+              <button class="card-mute-btn" title="Muet">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              </button>
+              <div class="card-progress-wrap"><div class="card-progress-bg"><div class="card-progress-fill"></div></div></div>
+            </div>
+            <div class="card-bottom-bar">
+              <div class="card-side-label">Mon Cœur, Ma Chérie</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /track -->
+    </div><!-- /wrap -->
+
+    <div class="carousel-dots" id="carouselDots">
+      <div class="dot-indicator active" data-slide="0"></div>
+      <div class="dot-indicator" data-slide="1"></div>
+      <div class="dot-indicator" data-slide="2"></div>
+      <div class="dot-indicator" data-slide="3"></div>
+      <div class="dot-indicator" data-slide="4"></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section-light">
+  <span class="section-label">COMMENT ÇA MARCHE</span>
+  <h2>De votre histoire à leurs larmes</h2>
+  <p class="section-sub">Quatre étapes. Une chanson inoubliable. Prête en une semaine.</p>
+  <div class="start-here-label">COMMENCEZ ICI</div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-header"><div class="step-num">1</div><span class="step-badge">5 MIN</span></div>
+      <hr class="step-divider">
+      <h3>Répondez à quelques questions simples</h3>
+      <p>Parlez-nous de la personne et du moment. Pas d'écriture, pas de prise de tête — juste les petits détails que vous seul connaissez.</p>
+      <div class="step-footer">Prend 5 minutes</div>
+    </div>
+    <div class="step-card">
+      <div class="step-header"><div class="step-num">2</div><span class="step-badge">QUELQUES JOURS</span></div>
+      <hr class="step-divider">
+      <h3>Nous faisons notre magie</h3>
+      <p>Notre équipe de spécialistes musicaux façonne votre histoire en la chanson parfaite — les bons mots, la bonne mélodie, le bon sentiment.</p>
+      <div class="step-footer">Créé rien que pour vous</div>
+    </div>
+    <div class="step-card">
+      <div class="step-header"><div class="step-num">3</div><span class="step-badge">JOUR 7</span></div>
+      <hr class="step-divider">
+      <h3>Nous vous envoyons la chanson parfaite</h3>
+      <p>Un lien privé arrive dans votre boîte mail avec la pochette et les paroles, prêt à partager quand le moment sera venu.</p>
+      <div class="step-footer">À vous pour toujours</div>
+    </div>
+    <div class="step-card">
+      <div class="step-header"><div class="step-num">4</div><span class="step-badge">LE BON GENRE</span></div>
+      <hr class="step-divider">
+      <h3>Préparez les mouchoirs</h3>
+      <p>Appuyez sur play. Tendez-leur des mouchoirs. C'est le genre de moment dont vous parlerez pendant des années.</p>
+      <div class="step-footer">Les larmes de joie sont garanties</div>
+    </div>
+  </div>
+  <div class="cta-center">
+    <a href="#" class="btn-primary">Commencer Votre Chanson</a>
+    <span class="cta-note">Prend 5 minutes — aucun paiement avant approbation du brouillon</span>
+  </div>
+</section>
+<section class="section-question">
+  <div class="eyebrow">UNE QUESTION</div>
+  <h2>Comment offrir à quelqu'un <em>le cadeau le plus mémorable</em> ?</h2>
+  <a href="#" class="btn-primary">Créer Votre Chanson</a>
+  <span class="cta-dark-sub">Moins de trois minutes, du début à la fin</span>
+</section>
+
+<!-- REAL STORY SECTION -->
+<section class="section-story">
+  <div class="story-eyebrow">UNE VRAIE HISTOIRE</div>
+  <h2 class="story-headline">50 ans. 5 enfants. 11 petits-enfants. <em>Une bague à 45€.</em></h2>
+  <p class="story-sub">Le genre de chanson d'amour qui prend une vie entière à écrire — et sept jours à enregistrer.</p>
+
+  <div class="story-split">
+    <div class="story-form-side">
+      <div class="story-what-label">CE QU'IL A ÉCRIT</div>
+      <div class="form-field-mock">
+        <div class="field-label">Style · Tempo · Voix</div>
+        <div class="field-tags"><span class="field-tag">COUNTRY</span><span class="field-tag">LENT</span><span class="field-tag">MASCULIN</span></div>
+      </div>
+      <div class="form-field-mock">
+        <div class="field-label">Souvenir Spécial</div>
+        <div class="field-text">Quand on s'est marié au tribunal, j'avais oublié mon portefeuille, alors le père de Rita a payé les 10€ pour le juge.</div>
+      </div>
+      <div class="form-field-mock">
+        <div class="field-label">Notes Supplémentaires</div>
+        <div class="field-text">Tout ce que je pouvais m'offrir c'était un simple anneau en or à 45€. Elle le porte encore aujourd'hui.</div>
+      </div>
+      <div class="form-field-mock">
+        <div class="field-label">Traits Physiques · Années Ensemble</div>
+        <div class="field-text">Yeux verts, cheveux blonds, 1m64 · 50 ans ensemble le 30 janvier</div>
+      </div>
+    </div>
+    <div class="story-song-side">
+      <div class="song-output-label">CE QU'ELLE ENTENDRA</div>
+      <div class="becomes-arrow">
+        <span style="font-size:11px;letter-spacing:0.14em;color:var(--text-muted);font-weight:500;">DEVIENT</span>
+        <svg width="80" height="20" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 14 C10 14, 20 4, 35 8 C50 12, 60 6, 70 8" stroke="#C8C0B4" stroke-width="1.2" stroke-dasharray="3 3" stroke-linecap="round" fill="none"/>
+          <path d="M66 5 L71 9 L66 13" stroke="#C8C0B4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <span style="font-size:11px;letter-spacing:0.14em;color:var(--text-muted);font-weight:500;">UNE CHANSON</span>
+      </div>
+      <div class="song-line"><span class="italic-text">Guitare en acier doux, une mélopée country à bas tempo —</span></div>
+      <div class="song-line">Ton papa a payé le juge <span class="italic-text">dix euros,</span><br><span class="plain-text">et d'une façon ou d'une autre, il m'a donné pour toujours.</span></div>
+      <div class="song-line"><span class="italic-text">Une promesse à quarante-cinq euros</span><br><span class="plain-text">qui brille encore à sa main —</span></div>
+      <div class="song-line"><span class="italic-text">Fille aux yeux verts dans le parking,</span><br><span class="plain-text">tous les janviers, chaque fois les nôtres.</span></div>
+    </div>
+  </div>
+
+  <!-- Story card with audio player -->
+  <div class="story-card">
+    <div class="song-player-mock">
+      <!-- Tape strips -->
+      <div class="player-tape left"></div>
+      <div class="player-tape right"></div>
+
+      <!-- Cover with cursive title + play button -->
+      <div class="player-cover" style="background-image:url('images/cover.png');background-size:cover;background-position:center;">
+        <div class="player-cover-text">Je T'Aime Plus</div>
+        <div class="player-play-btn" id="storyPlayBtn">
+          <svg id="storyPlayIcon" viewBox="0 0 24 24" width="18" height="18"><polygon points="5,3 19,12 5,21"/></svg>
+          <svg id="storyPauseIcon" viewBox="0 0 24 24" width="18" height="18" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </div>
+      </div>
+
+      <!-- Meta -->
+      <div class="player-meta">
+        <div class="song-name">Cinquante Hivers</div>
+        <div class="song-dedication">Pour Rita, de son mari</div>
+      </div>
+
+      <!-- Progress bar with replay icon + time -->
+      <div class="player-progress-wrap">
+        <div class="player-progress-bar" id="storyProgressBar">
+          <div class="player-progress-fill" id="storyProgressFill"></div>
+        </div>
+        <div class="player-time-row">
+          <button class="player-replay-btn" id="storyReplayBtn" title="Rejouer">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
+          </button>
+          <span id="storyCurrentTime">0:00</span>
+          <span id="storyDuration">0:00</span>
+        </div>
+      </div>
+
+      <audio id="storyAudio" preload="none"></audio>
+    </div>
+
+    <div class="story-narrative">
+      <div class="author-tag">
+        <span>RITA & SON MARI · 30 JANVIER</span>
+      </div>
+      <h3>Il se souvient encore de la première fois qu'il l'a vue.</h3>
+      <p>De longs cheveux blonds dans le dos, marchant dans le parking de l'école. Les yeux verts. La cinquième de dix frères et sœurs — il était ami avec ses frères.</p>
+      <p>Quand ils se sont mariés au tribunal, il avait oublié son portefeuille, donc le père de Rita a payé les 10€. L'alliance était un simple anneau en or — tout ce qu'il pouvait s'offrir c'était 45€. Elle le porte encore aujourd'hui.</p>
+      <p>Ensemble ils ont géré une ferme laitière pendant 12 ans, élevé cinq enfants. Elle n'a jamais eu un mot à dire. Pas une seule fois. Puis elle est retournée à l'école, son DEA, puis son diplôme d'infirmière. 35 ans dans les maisons de retraite. Cette année elle a terminé son combat contre le cancer du sein.</p>
+      <blockquote class="story-blockquote">Elle est sa meilleure amie. Son âme sœur. Et après 50 ans, il voulait lui dire : "Je t'aime plus."</blockquote>
+      <div class="story-stats">
+        <div class="stat-item"><div class="stat-num">50</div><div class="stat-label">Années Ensemble</div></div>
+        <div class="stat-item"><div class="stat-num">11</div><div class="stat-label">Petits-enfants · 1 Grandiose</div></div>
+        <div class="stat-item"><div class="stat-num">45€</div><div class="stat-label">La Bague Qu'elle Porte Encore</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PURPLE — WATCH REACTIONS -->
+<section class="section-purple">
+  <div class="section-purple-inner">
+    <h2>Regardez de Vraies Réactions. Ressentez l'Émotion.</h2>
+    <p>Ce ne sont pas des acteurs. Ce sont de <strong>vraies personnes</strong> qui entendent leur chanson personnalisée pour la première fois. <em>Imaginez créer ce moment pour quelqu'un que vous aimez.</em></p>
+  </div>
+
+  <div class="reaction-slider-outer" id="reactionSliderOuter">
+    <div class="reaction-slider-track-wrap">
+      <div class="reaction-slider-track" id="reactionGrid">
+
+        <div class="reaction-card">
+          <div class="reaction-video-wrap">
+            <video class="reaction-video-el" playsinline muted preload="none" loop></video>
+            <div class="reaction-poster">
+              <div class="reaction-poster-bg" style="background:linear-gradient(160deg,#2A1F30 0%,#1A1018 100%);"></div>
+              <div class="reaction-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reaction-card">
+          <div class="reaction-video-wrap">
+            <video class="reaction-video-el" playsinline muted preload="none" loop></video>
+            <div class="reaction-poster">
+              <div class="reaction-poster-bg" style="background:linear-gradient(160deg,#1E2A1A 0%,#101810 100%);"></div>
+              <div class="reaction-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reaction-card">
+          <div class="reaction-video-wrap">
+            <video class="reaction-video-el" playsinline muted preload="none" loop></video>
+            <div class="reaction-poster">
+              <div class="reaction-poster-bg" style="background:linear-gradient(160deg,#2A2010 0%,#1A1208 100%);"></div>
+              <div class="reaction-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reaction-card">
+          <div class="reaction-video-wrap">
+            <video class="reaction-video-el" playsinline muted preload="none" loop></video>
+            <div class="reaction-poster">
+              <div class="reaction-poster-bg" style="background:linear-gradient(160deg,#10201A 0%,#081410 100%);"></div>
+              <div class="reaction-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reaction-card">
+          <div class="reaction-video-wrap">
+            <video class="reaction-video-el" playsinline muted preload="none" loop></video>
+            <div class="reaction-poster">
+              <div class="reaction-poster-bg" style="background:linear-gradient(160deg,#20101A 0%,#140810 100%);"></div>
+              <div class="reaction-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Nav buttons -->
+    <button class="reaction-nav-btn prev" id="reactionPrev" aria-label="Précédent">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
+    </button>
+    <button class="reaction-nav-btn next" id="reactionNext" aria-label="Suivant">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>
+    </button>
+  </div>
+
+  <div class="cta-purple-bottom">
+    <p class="swipe-hint">Glissez pour voir plus de réactions</p>
+    <p class="cta-purple-main"><strong>Votre proche mérite ce moment.</strong> Le sourire. Les larmes de joie. Le souvenir qu'ils chériront pour toujours.</p>
+    <a href="#" class="btn-purple-cta">Créer leur Moment Inoubliable</a>
+    <p class="cta-purple-sub">Les larmes de bonheur garanties, ou remboursé</p>
+  </div>
+</section>
+
+<!-- WHY A SONG -->
+<section class="section-why">
+  <div class="eyebrow">POURQUOI UNE CHANSON</div>
+  <h2>Les fleurs fanent. <em>Les chansons, jamais.</em></h2>
+  <p>Un cadeau traditionnel, c'est un instant. Une chanson sur la personne que vous aimez, c'est une bande-son — rejouée à chaque anniversaire, chaque Noël, chaque mardi tranquille où ils ont besoin d'une raison de sourire.</p>
+  <div class="comparison-grid">
+    <div class="comparison-card" style="position:relative;">
+      <div class="comparison-label"><span>★</span> TRADITIONAL GIFT CO.</div>
+      <h4>La voie habituelle</h4>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;padding-bottom:10px;border-bottom:1px dashed #C8C4BC;">Commande n°4471 · Merci !</p>
+      <div class="comparison-item"><div><div class="item-name strike">2 douzaines de roses</div><div class="item-note">fanées en 6 jours</div></div><span class="item-price">89,00€</span></div>
+      <div class="comparison-item"><div><div class="item-name strike">Boîte de chocolats</div><div class="item-note">terminée jeudi</div></div><span class="item-price">32,00€</span></div>
+      <div class="comparison-item"><div><div class="item-name strike">Bougie parfumée</div><div class="item-note">jamais allumée</div></div><span class="item-price">28,00€</span></div>
+      <div class="comparison-item"><div><div class="item-name strike">Carte cadeau 100€</div><div class="item-note">perdue dans un tiroir</div></div><span class="item-price">100,00€</span></div>
+      <div class="comparison-item"><div><div class="item-name strike">Jolie carte</div><div class="item-note">recyclée au printemps</div></div><span class="item-price">6,50€</span></div>
+      <div class="comparison-total"><span>SOUS-TOTAL</span><span>255,50€</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:8px 0 12px;border-top:1px dashed #C8C4BC;margin-top:2px;">
+        <span style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);font-weight:500;">DURÉE DE VIE</span>
+        <span style="font-family:var(--serif);font-style:italic;font-size:22px;font-weight:300;color:var(--text-primary);">~ une semaine</span>
+      </div>
+      <div style="text-align:center;font-size:11px;color:var(--text-muted);letter-spacing:0.1em;padding-top:8px;border-top:1px dashed #C8C4BC;">— MERCI, REVENEZ —</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div class="vs-circle">VS.</div>
+      <div class="or-both">ou les deux</div>
+    </div>
+    <div class="winner-card" style="position:relative;">
+      <!-- Triangle badge THE WINNER -->
+      <div class="winner-badge-triangle"></div>
+      <!-- Dark header -->
+      <div class="player-header">
+        <div class="player-icon"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+        <div class="song-info">
+          <div class="title">Pour Sarah — leur chanson</div>
+          <div class="sub">3:24 · POUR TOUJOURS</div>
+        </div>
+        <div style="margin-left:auto;background:var(--wine);color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+      </div>
+      <div class="player-waveform" style="height:32px;margin:0;padding:8px 16px;box-sizing:content-box;background-color:var(--dark);"></div>
+      <!-- White content body -->
+      <div class="winner-card-body">
+        <div class="where-plays-label">OÙ ELLE SE JOUE</div>
+        <div class="where-plays-title">Une bande-son <em>rien que pour eux</em></div>
+        <div class="where-plays-sub">Chaque moment qui compte — pour le reste de leur vie</div>
+        <div class="plays-grid">
+          <div class="play-item"><span class="play-num">01</span><div><strong>La <em>première écoute</em>, gorge serrée</strong><span class="play-when">JOUR 1</span></div></div>
+          <div class="play-item"><span class="play-num">02</span><div><strong>Partagée à <em>tous</em> ceux qu'ils aiment</strong><span class="play-when">SEMAINE 1</span></div></div>
+          <div class="play-item"><span class="play-num">03</span><div><strong>Leur anniversaire, à table</strong><span class="play-when">CHAQUE ANNÉE</span></div></div>
+          <div class="play-item"><span class="play-num">04</span><div><strong>Anniversaire, <em>dansé lentement</em></strong><span class="play-when">CHAQUE ANNÉE</span></div></div>
+          <div class="play-item"><span class="play-num">05</span><div><strong>Toast de Noël, passé à la ronde</strong><span class="play-when">CHAQUE ANNÉE</span></div></div>
+          <div class="play-item"><span class="play-num">06</span><div><strong>Un mardi quelconque où ils en ont besoin</strong><span class="play-when">N'IMPORTE QUAND</span></div></div>
+        </div>
+        <div class="winner-lifetime">
+          <span>DURÉE DE VIE</span>
+          <span class="lifetime-val">une vie entière</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="difference-text">La différence, c'est <em>cinq minutes</em> à répondre à des questions.</p>
+  <div class="cta-center">
+    <a href="#" class="btn-primary">Commencer votre chanson</a>
+    <span class="cta-note">Satisfaction 100% garantie · Livré en 7 jours</span>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="section-pain">
+  <h2>On en a tous été là…</h2>
+  <p>Dans un magasin à 22h, face aux rayons, en pensant <em>"Rien n'est assez bien."</em></p>
+  <div class="pain-grid">
+    <div class="pain-card">
+      <div class="pain-card-header">
+        <div class="pain-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="14" rx="2"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/><line x1="12" y1="13" x2="12" y2="17"/></svg></div>
+        <h4>Les cadeaux génériques prennent la poussière</h4>
+      </div>
+      <p>Encore une bougie. Encore une carte. Encore un truc qui dit "je ne savais pas quoi te prendre."</p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-card-header">
+        <div class="pain-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h4>Le personnel prend trop de temps</h4>
+      </div>
+      <p>Vous voulez quelque chose d'unique, mais qui a des heures à passer à créer quelque chose à la main ?</p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-card-header">
+        <div class="pain-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <h4>Les mots ne suffisent plus</h4>
+      </div>
+      <p>"Je t'aime" semble tout petit quand vous voulez exprimer tout ce qu'ils représentent pour vous.</p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-card-header">
+        <div class="pain-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 15s1.5-2 4-2 4 2 4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+        <h4>Rien ne semble vraiment spécial</h4>
+      </div>
+      <p>Ils peuvent tout s'acheter eux-mêmes. Comment offrir quelque chose que l'argent seul ne peut pas acheter ?</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IF YOU COULD -->
+<section class="section-whatif">
+  <div class="eyebrow">ET SI VOUS POUVIEZ</div>
+  <h2>Transformer vos souvenirs partagés, vos blagues intimes et votre histoire d'amour en une <em>chanson produite professionnellement</em> qu'ils joueront en boucle ?</h2>
+  <p><strong>En seulement 5 minutes</strong>, partagez votre histoire. <strong>En 7 jours</strong>, recevez une chanson unique qui capture tout ce que les mots seuls ne peuvent pas dire.</p>
+  <div class="review-card-featured">
+    <div class="review-stars"><span>★★★★★</span></div>
+    <p class="review-text">"Je l'ai passée lors de notre dîner d'anniversaire. Dès le deuxième couplet, on pleurait tous les deux. Elle a capturé 25 ans de notre histoire en 3 minutes. C'est le cadeau le plus beau que j'aie jamais offert."</p>
+    <div class="reviewer">
+      <img src="images/depo2.png" alt="Antoine B." style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+      <div><div class="reviewer-name">Antoine B.</div><div class="reviewer-meta">Cadeau Anniversaire · Achat Vérifié</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PERFECT FOR EVERY MOMENT -->
+<section class="section-occasions">
+  <h2>Parfait Pour Chaque Moment Qui Compte</h2>
+  <p>Quelle que soit l'occasion, nous vous aidons à créer la chanson parfaite</p>
+  <div class="occasions-grid">
+    <div class="occasion-card">
+      <div class="occasion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h4>Pour les Parents</h4>
+      <p>Célébrez Maman, Papa, ou les grands-parents avec une chanson qui raconte leur histoire…</p>
+      <div class="occasion-tags">Fête des Pères, Fête des Mères, retraite</div>
+    </div>
+    <div class="occasion-card">
+      <div class="occasion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      <h4>Pour les Partenaires</h4>
+      <p>Exprimez votre amour d'une façon qui les laisse sans voix</p>
+      <div class="occasion-tags">Anniversaire, Saint-Valentin, demande en mariage</div>
+    </div>
+    <div class="occasion-card">
+      <div class="occasion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <h4>Hommage</h4>
+      <p>Honorez un proche qui nous a quittés avec un bel hommage musical</p>
+      <div class="occasion-tags">Célébration de vie, services mémoriaux</div>
+    </div>
+    <div class="occasion-card">
+      <div class="occasion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg></div>
+      <h4>Pour les Enfants</h4>
+      <p>Créez une berceuse personnalisée ou une chanson qu'ils chériront pour toujours</p>
+      <div class="occasion-tags">Naissance, adoption, baptême, étapes de vie</div>
+    </div>
+    <div class="occasion-card">
+      <div class="occasion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+      <h4>Foi</h4>
+      <p>Célébrez les parcours spirituels avec des paroles inspirées par la foi</p>
+      <div class="occasion-tags">Baptême, confirmation, témoignage</div>
+    </div>
+    <div class="occasion-card">
+      <div class="occasion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+      <h4>Guérison</h4>
+      <p>Offrez du réconfort et de l'espoir pendant les moments difficiles</p>
+      <div class="occasion-tags">Rétablissement, encouragement, soutien</div>
+    </div>
+    <div class="occasion-card">
+      <div class="occasion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/><circle cx="12" cy="12" r="2"/></svg></div>
+      <h4>Mariage</h4>
+      <p>Une chanson de première danse écrite spécialement pour vous deux</p>
+      <div class="occasion-tags">Première danse, cérémonie, dîner de répétition</div>
+    </div>
+    <div class="occasion-card">
+      <div class="occasion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+      <h4>Jalons</h4>
+      <p>Marquez les grandes étapes de la vie avec une chanson qui raconte l'histoire</p>
+      <div class="occasion-tags">Diplôme, retraite, anniversaires</div>
+    </div>
+  </div>
+  <p class="occasions-cta-note">Vous ne voyez pas votre occasion ? <strong>Toutes les histoires sont les bienvenues.</strong></p>
+  <div class="cta-center"><a href="#" class="btn-primary">Créer La Vôtre</a></div>
+</section>
+
+
+<!-- REVIEWS -->
+<section class="section-reviews">
+  <div class="section-reviews-inner">
+    <!-- Trustpilot pill -->
+    <div class="trustpilot-header">
+      <div class="tp-pill">
+        <div class="tp-pill-stars">
+          <span><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+        </div>
+        <span class="tp-pill-rating">4.9</span>
+        <div class="tp-pill-logo">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Trustpilot
+        </div>
+      </div>
+    </div>
+    <h2>Des Milliers d'Histoires Transformées en Chansons</h2>
+    <p>Voyez ce que nos clients disent sur Trustpilot</p>
+  </div>
+
+  <!-- Slider -->
+  <div class="reviews-slider-outer">
+    <div class="reviews-slider-wrap">
+      <div class="reviews-slider-track" id="reviewsTrack">
+
+        <div class="review-card">
+          <div class="tp-row">
+            <div class="tp-stars"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="tp-logo"><span class="tp-logo-star">★</span> Trustpilot</div>
+          </div>
+          <h4>Super chanson, super service !</h4>
+          <div class="review-body">"Mon fiancé et moi avons commandé une chanson mère-fils personnalisée pour la danse. La qualité de la composition était excellente, la livraison rapide et le service très réactif."</div>
+          <div class="reviewer-info"><div class="reviewer-avatar sm green">K</div><div><div class="reviewer-name-sm">Kimberly Richardson</div><div class="reviewer-date">28 Février 2026</div></div></div>
+        </div>
+
+        <div class="review-card">
+          <div class="tp-row">
+            <div class="tp-stars"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="tp-logo"><span class="tp-logo-star">★</span> Trustpilot</div>
+          </div>
+          <h4>Des artistes exceptionnels qui ont mis mon cœur dans une chanson !</h4>
+          <div class="review-body">"J'ai découvert DivineSong sur Facebook et leur ai demandé de créer une chanson personnalisée sur ma mère décédée. La chanson était tellement belle, capturant tout ce que j'avais partagé sur elle."</div>
+          <div class="reviewer-info"><div class="reviewer-avatar sm" style="background:#4A6B5A;">A</div><div><div class="reviewer-name-sm">Anita M.</div><div class="reviewer-date">28 Février 2026</div></div></div>
+        </div>
+
+        <div class="review-card">
+          <div class="tp-row">
+            <div class="tp-stars"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="tp-logo"><span class="tp-logo-star">★</span> Trustpilot</div>
+          </div>
+          <h4>Un Trésor Inestimable !!</h4>
+          <div class="review-body">"Wow!! Absolument incroyable!! Ils ont transformé notre histoire d'amour en la plus belle chanson que nous chérirons pour toujours. Un cadeau intemporel!!"</div>
+          <div class="reviewer-info"><div class="reviewer-avatar sm" style="background:#6B4A5A;">K</div><div><div class="reviewer-name-sm">Kathy Qualey</div><div class="reviewer-date">28 Février 2026</div></div></div>
+        </div>
+
+        <div class="review-card">
+          <div class="tp-row">
+            <div class="tp-stars"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="tp-logo"><span class="tp-logo-star">★</span> Trustpilot</div>
+          </div>
+          <h4>Parfaite à 100% !</h4>
+          <div class="review-body">"Ils l'ont réussie à 100% ! La chanson a été livrée 4 jours avant, dépassant toutes mes attentes."</div>
+          <div class="reviewer-info"><div class="reviewer-avatar sm" style="background:#4A5A6B;">T</div><div><div class="reviewer-name-sm">Tina Murray</div><div class="reviewer-date">27 Février 2026</div></div></div>
+        </div>
+
+        <div class="review-card">
+          <div class="tp-row">
+            <div class="tp-stars"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="tp-logo"><span class="tp-logo-star">★</span> Trustpilot</div>
+          </div>
+          <h4>Jackie et son équipe ont été remarquables</h4>
+          <div class="review-body">"Le service client était incroyablement réactif lors de plusieurs révisions. Ils ont fait l'impossible pour que tout soit parfait."</div>
+          <div class="reviewer-info"><div class="reviewer-avatar sm" style="background:#5A4A6B;">R</div><div><div class="reviewer-name-sm">Rebeka Bourque</div><div class="reviewer-date">27 Février 2026</div></div></div>
+        </div>
+
+        <div class="review-card">
+          <div class="tp-row">
+            <div class="tp-stars"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="tp-logo"><span class="tp-logo-star">★</span> Trustpilot</div>
+          </div>
+          <h4>Un souvenir si précieux…</h4>
+          <div class="review-body">"Un souvenir tellement précieux. J'ai été profondément touché par la qualité professionnelle. Légèrement en retard mais absolument magnifique."</div>
+          <div class="reviewer-info"><div class="reviewer-avatar sm" style="background:#4A6B6B;">E</div><div><div class="reviewer-name-sm">Eleanor Rooks</div><div class="reviewer-date">26 Février 2026</div></div></div>
+        </div>
+
+        <div class="review-card">
+          <div class="tp-row">
+            <div class="tp-stars"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="tp-logo"><span class="tp-logo-star">★</span> Trustpilot</div>
+          </div>
+          <h4>Je ne peux même pas exprimer ce que je ressens…</h4>
+          <div class="review-body">"Mon conjoint et moi n'arrêtons pas de l'écouter. On la passe encore et encore."</div>
+          <div class="reviewer-info"><div class="reviewer-avatar sm" style="background:#6B4A4A;">B</div><div><div class="reviewer-name-sm">Bettina Teusch</div><div class="reviewer-date">26 Février 2026</div></div></div>
+        </div>
+
+        <div class="review-card cta-card">
+          <div class="music-icon">🎵</div>
+          <h4>Prêt à Créer la Vôtre ?</h4>
+          <p>Transformez votre histoire en une chanson unique qu'ils chériront pour toujours.</p>
+          <a href="#" class="btn-primary" style="font-size:14px;padding:12px 20px;">Commencer Votre Chanson →</a>
+        </div>
+
+      </div>
+    </div>
+    <button class="reviews-nav-btn prev" id="reviewsPrev" aria-label="Précédent">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+    </button>
+    <button class="reviews-nav-btn next" id="reviewsNext" aria-label="Suivant">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>
+    </button>
+  </div>
+
+  <a href="#" class="see-all-link" style="padding:0 40px;display:block;">Voir tous les avis →</a>
+</section>
+
+
+<!-- PRODUCT DEMO — THÉMATIQUES -->
+<section class="section-themes">
+  <div class="themes-header">
+    <p class="themes-plus">Plus de <strong>milliers</strong> de chansons privées</p>
+    <p class="themes-sub">Créées pour des familles qui ont choisi de garder leurs chansons pour elles</p>
+  </div>
+  <div class="themes-grid">
+
+    <div class="theme-card" style="background-image:url('images/a1.png')">
+      <div class="theme-overlay"></div>
+      <div class="theme-text">
+        <div class="theme-title">Anniversaire de Mariage</div>
+        <div class="theme-sub">Célébrez votre histoire d'amour</div>
+      </div>
+    </div>
+
+    <div class="theme-card" style="background-image:url('images/a2.png')">
+      <div class="theme-overlay"></div>
+      <div class="theme-text">
+        <div class="theme-title">Mariage</div>
+        <div class="theme-sub">La première danse parfaite</div>
+      </div>
+    </div>
+
+    <div class="theme-card" style="background-image:url('images/a3.png')">
+      <div class="theme-overlay"></div>
+      <div class="theme-text">
+        <div class="theme-title">Anniversaire</div>
+        <div class="theme-sub">Rendez leur jour inoubliable</div>
+      </div>
+    </div>
+
+    <div class="theme-card" style="background-image:url('images/a4.png')">
+      <div class="theme-overlay"></div>
+      <div class="theme-text">
+        <div class="theme-title">Hommage</div>
+        <div class="theme-sub">Honorez ceux qu'on chérit</div>
+      </div>
+    </div>
+
+    <div class="theme-card" style="background-image:url('images/a5.png')">
+      <div class="theme-overlay"></div>
+      <div class="theme-text">
+        <div class="theme-title">Fête des Mères</div>
+        <div class="theme-sub">Remerciez-la pour tout</div>
+      </div>
+    </div>
+
+    <div class="theme-card" style="background-image:url('images/a6.png')">
+      <div class="theme-overlay"></div>
+      <div class="theme-text">
+        <div class="theme-title">Fête des Pères</div>
+        <div class="theme-sub">Montrez-lui qu'il est votre héros</div>
+      </div>
+    </div>
+
+    <div class="theme-card" style="background-image:url('images/a7.png')">
+      <div class="theme-overlay"></div>
+      <div class="theme-text">
+        <div class="theme-title">Diplôme</div>
+        <div class="theme-sub">Célébrez leur réussite</div>
+      </div>
+    </div>
+
+    <div class="theme-card" style="background-image:url('images/a8.png')">
+      <div class="theme-overlay"></div>
+      <div class="theme-text">
+        <div class="theme-title">Noël</div>
+        <div class="theme-sub">Un cadeau venu du cœur</div>
+      </div>
+    </div>
+
+    <div class="theme-card" style="background-image:url('images/a9.png')">
+      <div class="theme-overlay"></div>
+      <div class="theme-text">
+        <div class="theme-title">Retraite</div>
+        <div class="theme-sub">Honorer une vie de travail</div>
+      </div>
+    </div>
+
+    <div class="theme-card" style="background-image:url('images/a10.png')">
+      <div class="theme-overlay"></div>
+      <div class="theme-text">
+        <div class="theme-title">Fiançailles</div>
+        <div class="theme-sub">Commencez votre pour toujours</div>
+      </div>
+    </div>
+
+    <div class="theme-card" style="background-image:url('images/a11.png')">
+      <div class="theme-overlay"></div>
+      <div class="theme-text">
+        <div class="theme-title">Baptême</div>
+        <div class="theme-sub">Une célébration sacrée</div>
+      </div>
+    </div>
+
+    <div class="theme-card" style="background-image:url('images/a12.png')">
+      <div class="theme-overlay"></div>
+      <div class="theme-text">
+        <div class="theme-title">Juste Parce Que</div>
+        <div class="theme-sub">L'amour n'a pas besoin de raison</div>
+      </div>
+    </div>
+
+    <div class="theme-card" style="background-image:url('images/a13.png')">
+      <div class="theme-overlay"></div>
+      <div class="theme-text">
+        <div class="theme-title">Saint-Valentin</div>
+        <div class="theme-sub">Dites-lui je t'aime autrement</div>
+      </div>
+    </div>
+
+    <div class="theme-card" style="background-image:url('images/a14.png')">
+      <div class="theme-overlay"></div>
+      <div class="theme-text">
+        <div class="theme-title">Guérison</div>
+        <div class="theme-sub">Offrez du réconfort et de l'espoir</div>
+      </div>
+    </div>
+
+    <div class="theme-card" style="background-image:url('images/a15.png')">
+      <div class="theme-overlay"></div>
+      <div class="theme-text">
+        <div class="theme-title">Naissance</div>
+        <div class="theme-sub">Accueillez le nouveau venu</div>
+      </div>
+    </div>
+
+    <div class="theme-card" style="background-image:url('images/a16.png')">
+      <div class="theme-overlay"></div>
+      <div class="theme-text">
+        <div class="theme-title">Encouragement</div>
+        <div class="theme-sub">Soutenez ceux que vous aimez</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ARTIST NOTE -->
+<section class="section-artist">
+  <div class="artist-card">
+    <div class="artist-card-header">
+      <div class="artist-avatar">
+        <img src="images/depo.png" alt="Lisa" onerror="this.style.display='none'"/>
+      </div>
+      <div class="artist-card-label">
+        <span class="artist-eyebrow">UNE NOTE DE L'UN DES ARTISTES DE DIVINESONG</span>
+        <span class="artist-name">Lisa</span>
+      </div>
+    </div>
+
+    <div class="artist-quote">
+      <p>"Il y a quelque chose de magique dans le fait de transformer les souvenirs de quelqu'un en musique. Quand je lis les petits moments — les blagues intimes, les premiers rendez-vous, les sacrifices silencieux — je me sens honorée qu'on me confie ces histoires.</p>
+      <p>Je crois que chaque histoire d'amour mérite sa propre bande-son. Qu'il s'agisse d'un anniversaire en or ou d'un simple 'merci', je mets tout en œuvre pour que votre chanson capture exactement ce que vous voulez dire.</p>
+      <p>Votre histoire est unique. Et j'ai hâte de vous aider à la partager."</p>
+    </div>
+
+    <div class="artist-footer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      Chaque chanson est personnellement créée par nos talentueux artistes musicaux
+    </div>
+  </div>
+</section>
+
+<!-- EVERYTHING YOU GET -->
+<section class="section-everything">
+  <h2 class="everything-title">Tout Ce Que Vous Obtenez</h2>
+  <p class="everything-sub">Un seul prix. Pas d'abonnement. Pas de frais cachés.</p>
+
+  <div class="everything-grid">
+
+    <div class="everything-card">
+      <div class="everything-card-header">
+        <div class="everything-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <span class="everything-label">Votre Chanson Personnalisée</span>
+      </div>
+      <p>Une chanson produite professionnellement de 2 à 3 minutes avec des paroles originales écrites à partir de votre histoire</p>
+    </div>
+
+    <div class="everything-card">
+      <div class="everything-card-header">
+        <div class="everything-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <span class="everything-label">Intégration de Votre Histoire</span>
+      </div>
+      <p>Chaque détail que vous partagez — noms, souvenirs, blagues intimes — tissés dans des paroles qui semblent profondément personnelles</p>
+    </div>
+
+    <div class="everything-card">
+      <div class="everything-card-header">
+        <div class="everything-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </div>
+        <span class="everything-label">Lien de Partage Privé</span>
+      </div>
+      <p>Un lien personnel pour partager votre chanson avec votre famille et vos amis — sans compte nécessaire</p>
+    </div>
+
+    <div class="everything-card">
+      <div class="everything-card-header">
+        <div class="everything-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/><path d="M12 7 L12 12 M9.5 14.5 L14.5 14.5" stroke-width="1" opacity="0.5"/></svg>
+        </div>
+        <span class="everything-label">Larmes Garanties</span>
+      </div>
+      <p>Nous avons fait pleurer des milliers de personnes de bonheur. Si votre destinataire n'aime pas la chanson, nous la révisons gratuitement</p>
+    </div>
+
+  </div>
+
+  <!-- Complete Package card -->
+  <div class="package-card">
+    <div class="package-top">
+      <div class="package-title">Package Complet</div>
+      <div class="package-sub">Sans frais mensuels. Sans abonnement.</div>
+    </div>
+    <hr class="package-divider">
+    <div class="package-includes">Votre chanson inclut :</div>
+    <ul class="package-list">
+      <li><span class="check">✓</span> Paroles 100% originales issues de votre histoire</li>
+      <li><span class="check">✓</span> Production de qualité studio professionnelle</li>
+      <li><span class="check">✓</span> Choisissez votre style / genre musical</li>
+      <li><span class="check">✓</span> Produite par de vrais musiciens professionnels</li>
+      <li><span class="check">✓</span> Gardez-la pour toujours — sans abonnement</li>
+    </ul>
+    <a href="#" class="btn-primary" style="display:block;text-align:center;margin-top:20px;">Commencer Maintenant</a>
+    <div class="package-guarantee">Satisfaction 100% garantie — vous l'aimez ou nous la révisons</div>
+  </div>
+
+</section>
+
+<!-- FAQ -->
+<section class="section-faq">
+  <h2 class="faq-title">Questions ? Nous Avons les Réponses</h2>
+  <p class="faq-sub">Tout ce que vous devez savoir avant de créer votre chanson</p>
+
+  <div class="faq-list">
+
+    <div class="faq-item open">
+      <button class="faq-question">
+        <span>Et si je ne suis pas bon écrivain ? Je ne sais pas comment raconter mon histoire.</span>
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Pas besoin de l'être ! Notre questionnaire guidé pose des questions simples sur votre relation, vos souvenirs et vos moments spéciaux. Répondez honnêtement — nous nous occupons de toute la partie créative. La plupart des gens le complètent en 5 à 10 minutes.</p>
+      </div>
+    </div>
+
+    <div class="faq-item open">
+      <button class="faq-question">
+        <span>Et s'ils n'aiment pas la chanson ?</span>
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Nous offrons des révisions illimitées jusqu'à ce que vous soyez 100% satisfait. Si la chanson ne capture pas votre histoire comme vous l'espériez, nous travaillerons avec vous pour bien faire les choses. Votre satisfaction est garantie.</p>
+      </div>
+    </div>
+
+    <div class="faq-item open">
+      <button class="faq-question">
+        <span>Est-ce que ça vaut vraiment le coup pour une chanson ?</span>
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Pensez à ce que vous dépenseriez pour un bon dîner, des fleurs ou un cadeau qui pourrait être oublié dans un mois. Ceci est un souvenir unique qu'ils écouteront pendant des années — lors d'anniversaires, de réunions de famille, ou quand ils veulent se sentir aimés. La plupart de nos clients disent que c'est le cadeau le plus significatif qu'ils aient jamais offert.</p>
+      </div>
+    </div>
+
+    <div class="faq-item open">
+      <button class="faq-question">
+        <span>Quels styles de musique proposez-vous ?</span>
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Nous proposons une large gamme de genres : pop, country, folk, acoustique, R&B, gospel/worship, piano classique et bien d'autres. Vous sélectionnez votre style préféré lors du questionnaire, et nous adaptons la production à votre choix.</p>
+      </div>
+    </div>
+
+    <div class="faq-item open">
+      <button class="faq-question">
+        <span>Comment l'offrir comme cadeau ?</span>
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Vous recevrez un lien privé que vous pouvez partager comme vous le souhaitez — la diffuser pendant un dîner, l'inclure dans une carte, ou l'envoyer en surprise par message. Certains clients la font jouer lors d'un moment spécial. La mise en scène vous appartient !</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section-final-cta">
+  <h2 class="final-cta-title">Offrez un Cadeau Qu'ils N'oublieront Jamais</h2>
+  <p class="final-cta-sub">En seulement 5 minutes, vous pouvez commencer à créer une chanson personnalisée qui les fera pleurer d'émotion. Aucun talent musical requis — juste votre histoire.</p>
+  <a href="#" class="btn-primary">Commencer Votre Chanson</a>
+  <div class="final-cta-badges">
+    <div class="final-cta-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Satisfaction 100% Garantie
+    </div>
+    <div class="final-cta-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      Produite Professionnellement
+    </div>
+  </div>
+</section>
+
+<!-- THEME MODAL -->
+<div class="theme-modal-backdrop" id="themeModalBackdrop">
+  <div class="theme-modal" id="themeModal">
+    <button class="theme-modal-close" id="themeModalClose">✕</button>
+
+    <!-- Polaroid photos stack -->
+    <div class="theme-modal-photos">
+      <div class="modal-photo">
+        <img src="images/modal1.png" alt="Pour toi" style="width:100%;height:100%;object-fit:cover;">
+        <span class="modal-photo-label">Pour toi</span>
+      </div>
+      <div class="modal-photo">
+        <img src="images/modal2.png" alt="Love this" style="width:100%;height:100%;object-fit:cover;">
+        <span class="modal-photo-label">Love this</span>
+      </div>
+      <div class="modal-photo">
+        <img src="images/modal3.png" alt="Grateful" style="width:100%;height:100%;object-fit:cover;">
+        <span class="modal-photo-label">Grateful</span>
+      </div>
+    </div>
+
+    <!-- Music icon -->
+    <div class="modal-music-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+      </svg>
+    </div>
+
+    <h3 id="themeModalTitle">Prêt à Créer Votre Chanson "Anniversaire" ?</h3>
+    <p id="themeModalBody">Rejoignez des milliers de familles qui ont transformé leurs moments "Anniversaire" en chansons inoubliables. Votre histoire mérite d'être entendue.</p>
+
+    <a href="#" class="btn-modal-cta">Commencer Votre Chanson Maintenant →</a>
+    <div class="modal-guarantee">Satisfaction 100% Garantie</div>
+  </div>
+</div>
+
+
+<footer class="footer">
+  <p style="color:rgba(255,255,255,0.8);font-weight:500;margin-bottom:4px;">DivineSong</p>
+  <p>© 2026 DivineSong. Tous droits réservés.</p>
+  <div class="footer-links">
+    <a href="#">Politique de Confidentialité</a>
+    <a href="#">Conditions d'Utilisation</a>
+    <a href="#">Politique de Remboursement</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   UTILITAIRES
+   ============================================================ */
+const svgMute = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>`;
+const svgUnmute = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>`;
+const svgPlay  = `<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><polygon points="5,3 19,12 5,21"/></svg>`;
+const svgPause = `<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`;
+
+function fmtTime(s) {
+  if (isNaN(s) || !isFinite(s)) return '0:00';
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${sec.toString().padStart(2,'0')}`;
+}
+
+/* ============================================================
+   COUNTDOWN
+   ============================================================ */
+(function(){
+  let t = 3*60+48;
+  const el = document.getElementById('countdown');
+  if (!el) return;
+  setInterval(()=>{
+    if(t<=0){t=15*60;return;}
+    t--;
+    el.textContent=`${String(Math.floor(t/60)).padStart(2,'0')}:${String(t%60).padStart(2,'0')}`;
+  },1000);
+})();
+
+/* ============================================================
+   HERO VIDEO
+   ============================================================ */
+(function(){
+  const vid    = document.getElementById('heroVideo');
+  const poster = document.getElementById('heroPoster');
+  const overlay= document.getElementById('heroPlayOverlay');
+  const bigBtn = document.getElementById('heroPlayBig');
+  const muteBtn= document.getElementById('heroMuteBtn');
+  const playBtn= document.getElementById('heroPlayBtn');
+  const muteIco= document.getElementById('heroMuteIcon');
+  const unmIco = document.getElementById('heroUnmuteIcon');
+  const playIco= document.getElementById('heroPlayIcon');
+  const pauseIco=document.getElementById('heroPauseIcon');
+
+  // Assign src from config
+  if (R2.hero) loadHLS(vid, R2.hero);
+
+  // Hide poster once video starts playing
+  vid.addEventListener('playing', ()=>{
+    poster.classList.add('hidden');
+    overlay.classList.add('hidden');
+    pauseIco.style.display = '';
+    playIco.style.display  = 'none';
+  });
+  vid.addEventListener('pause', ()=>{
+    overlay.classList.remove('hidden');
+    pauseIco.style.display = 'none';
+    playIco.style.display  = '';
+  });
+
+  // Mute toggle
+  function syncMute(){
+    if(vid.muted){
+      muteIco.style.display='';unmIco.style.display='none';
+      muteBtn.title='Activer le son';
+    } else {
+      muteIco.style.display='none';unmIco.style.display='';
+      muteBtn.title='Couper le son';
+    }
+  }
+  muteBtn.addEventListener('click',()=>{ vid.muted=!vid.muted; syncMute(); });
+  syncMute();
+
+  // Play/Pause toggle
+  function togglePlay(){ vid.paused ? vid.play() : vid.pause(); }
+  playBtn.addEventListener('click', togglePlay);
+  bigBtn.addEventListener('click',  togglePlay);
+
+  // Click on video itself
+  vid.addEventListener('click', togglePlay);
+})();
+
+/* ============================================================
+   CAROUSEL CARDS — cinematic full-bleed layout
+   ============================================================ */
+(function(){
+  let currentSlide = 0;
+  const cards  = document.querySelectorAll('#carouselTrack .carousel-card');
+  const track  = document.getElementById('carouselTrack');
+  const dots   = document.querySelectorAll('#carouselDots .dot-indicator');
+  const TOTAL  = cards.length;
+
+  // Assign video sources + posters
+  cards.forEach((card, i)=>{
+    const vid = card.querySelector('.card-video-el');
+    if (!vid) return;
+    if (R2.carousel[i]) loadHLS(vid, R2.carousel[i]);
+    if (R2.carouselPosters[i]) vid.poster = R2.carouselPosters[i];
+  });
+
+  // Per-card video interaction
+  cards.forEach((card)=>{
+    const vid      = card.querySelector('.card-video-el');
+    const poster   = card.querySelector('.card-video-poster');
+    const playOvl  = card.querySelector('.card-play-overlay');
+    const muteBtn  = card.querySelector('.card-mute-btn');
+    const progFill = card.querySelector('.card-progress-fill');
+    if (!vid) return;
+
+    function pauseAll(){ document.querySelectorAll('#carouselTrack .card-video-el').forEach(v=>{ if(v!==vid){ v.pause(); v.closest('.carousel-card').classList.remove('playing'); } }); }
+
+    // Play button + poster click
+    [card.querySelector('.card-play-btn'), poster].forEach(el=>{
+      if(!el) return;
+      el.addEventListener('click', e=>{ e.stopPropagation(); pauseAll(); vid.play().catch(()=>{}); });
+    });
+    // Bar play button (center card)
+    const barPlayBtn = card.querySelector('#centerBarPlayBtn');
+    if(barPlayBtn){ barPlayBtn.addEventListener('click', e=>{ e.stopPropagation(); pauseAll(); vid.paused ? vid.play().catch(()=>{}) : vid.pause(); }); }
+
+    vid.addEventListener('playing',()=>{
+      card.classList.add('playing');
+      if(poster)  poster.classList.add('hidden');
+      if(playOvl) playOvl.classList.add('hidden');
+    });
+    vid.addEventListener('pause',()=>{
+      card.classList.remove('playing');
+      if(playOvl) playOvl.classList.remove('hidden');
+    });
+
+    // Progress bar (card-level + center bar)
+    vid.addEventListener('timeupdate',()=>{
+      if(!vid.duration) return;
+      const pct = (vid.currentTime/vid.duration)*100;
+      if(progFill) progFill.style.width=pct+'%';
+      const centerFill = document.getElementById('centerBarProgress');
+      if(centerFill && card.classList.contains('center-card')) centerFill.style.width=pct+'%';
+    });
+
+    // Mute toggle (card mute btn)
+    if(muteBtn){
+      muteBtn.addEventListener('click', e=>{
+        e.stopPropagation(); vid.muted=!vid.muted;
+        muteBtn.innerHTML = vid.muted ? svgMute : svgUnmute;
+        const badge=card.querySelector('#centerAudioBadge');
+        if(badge) badge.innerHTML=(vid.muted ? svgMute+' Activer le son' : svgUnmute+' Couper le son');
+      });
+    }
+    // Center card audio badge click
+    const badge = card.querySelector('#centerAudioBadge');
+    if(badge){
+      badge.addEventListener('click', e=>{
+        e.stopPropagation(); vid.muted=!vid.muted;
+        badge.innerHTML=(vid.muted ? svgMute+' Activer le son' : svgUnmute+' Couper le son');
+        if(muteBtn) muteBtn.innerHTML=vid.muted?svgMute:svgUnmute;
+        if(vid.paused) vid.play().catch(()=>{});
+      });
+    }
+  });
+
+  // ── Navigation ──────────────────────────────────────────────
+  // For full-bleed layout, sliding shifts which card is "center".
+  // We translate the whole track so card[currentSlide] appears centered.
+  function getOffset(idx){
+    // Sum widths of cards 0..idx-1, then subtract half viewport minus half center card
+    let offset = 0;
+    const vw = window.innerWidth;
+    cards.forEach((c,i)=>{
+      if(i<idx) offset += c.offsetWidth;
+    });
+    const centerCard = cards[idx];
+    offset -= (vw - centerCard.offsetWidth) / 2;
+    return offset;
+  }
+
+  function goTo(i){
+    currentSlide = Math.max(0, Math.min(TOTAL-1, i));
+    // Update center-card class
+    cards.forEach((c,j)=>{ c.classList.toggle('center-card', j===currentSlide); });
+    track.style.transform = `translateX(${-getOffset(currentSlide)}px)`;
+    dots.forEach((d,j)=> d.classList.toggle('active', j===currentSlide));
+  }
+
+  dots.forEach((d,i)=> d.addEventListener('click',()=> goTo(i)));
+  window.addEventListener('resize', ()=> goTo(currentSlide));
+
+  // Touch swipe
+  let touchX=0;
+  track.addEventListener('touchstart',e=>{ touchX=e.touches[0].clientX; },{passive:true});
+  track.addEventListener('touchend',e=>{ const dx=touchX-e.changedTouches[0].clientX; if(Math.abs(dx)>40) goTo(currentSlide+(dx>0?1:-1)); });
+
+  // Click on a side card → center it
+  cards.forEach((c,i)=>{ c.addEventListener('click',()=>{ if(i!==currentSlide) goTo(i); }); });
+
+  // Init: center slide 2 (the default center card)
+  currentSlide = 2;
+  cards.forEach((c,j)=>{ c.classList.toggle('center-card', j===currentSlide); });
+  // Wait for layout, then position
+  requestAnimationFrame(()=> requestAnimationFrame(()=> goTo(currentSlide)));
+})();
+
+/* ============================================================
+   REACTION SLIDER (section violette)
+   ============================================================ */
+(function(){
+  const track   = document.getElementById('reactionGrid');
+  const cards   = document.querySelectorAll('#reactionGrid .reaction-card');
+  const prevBtn = document.getElementById('reactionPrev');
+  const nextBtn = document.getElementById('reactionNext');
+  let currentIdx = 0;
+  const CARD_W = () => cards[0] ? cards[0].offsetWidth + 12 : 232;
+
+  // Assign video sources
+  cards.forEach((card, i)=>{
+    const vid = card.querySelector('.reaction-video-el');
+    if(vid && R2.reactions[i]) loadHLS(vid, R2.reactions[i]);
+  });
+
+  // Per-card video play logic
+  cards.forEach((card)=>{
+    const vid     = card.querySelector('.reaction-video-el');
+    const poster  = card.querySelector('.reaction-poster');
+    const playBtn = card.querySelector('.reaction-play-btn');
+    if(!vid) return;
+
+    function togglePlay(){
+      if(vid.paused){
+        document.querySelectorAll('#reactionGrid .reaction-video-el').forEach(v=>{ if(v!==vid) v.pause(); });
+        vid.play().catch(()=>{});
+      } else { vid.pause(); }
+    }
+    vid.addEventListener('playing',()=>{ if(poster) poster.classList.add('hidden'); });
+    vid.addEventListener('pause', ()=>{ if(poster) poster.classList.remove('hidden'); });
+    [card, playBtn].forEach(el=>{ if(el) el.addEventListener('click', e=>{ e.stopPropagation(); togglePlay(); }); });
+  });
+
+  // Slider navigation — offset so first card starts with padding
+  function goTo(i){
+    currentIdx = Math.max(0, Math.min(cards.length - 1, i));
+    const offset = currentIdx * CARD_W();
+    track.style.transform = `translateX(${-offset}px)`;
+  }
+
+  if(prevBtn) prevBtn.addEventListener('click', ()=> goTo(currentIdx - 1));
+  if(nextBtn) nextBtn.addEventListener('click', ()=> goTo(currentIdx + 1));
+
+  // Touch swipe
+  let tx = 0;
+  track.addEventListener('touchstart', e=>{ tx = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend',   e=>{ const dx = tx - e.changedTouches[0].clientX; if(Math.abs(dx)>40) goTo(currentIdx + (dx>0?1:-1)); });
+
+  // Init with padding offset so first card isn't flush against edge
+  track.style.paddingLeft = '40px';
+  window.addEventListener('resize', ()=> goTo(currentIdx));
+})();
+
+/* ============================================================
+   STORY AUDIO PLAYER
+   ============================================================ */
+(function(){
+  const audio    = document.getElementById('storyAudio');
+  const playBtn  = document.getElementById('storyPlayBtn');
+  const playIco  = document.getElementById('storyPlayIcon');
+  const pauseIco = document.getElementById('storyPauseIcon');
+  const fill     = document.getElementById('storyProgressFill');
+  const bar      = document.getElementById('storyProgressBar');
+  const curTime  = document.getElementById('storyCurrentTime');
+  const durEl    = document.getElementById('storyDuration');
+
+  if(R2.storySong) audio.src = R2.storySong;
+
+  playBtn.addEventListener('click',()=>{
+    if(audio.paused){ audio.play().catch(()=>{}); }
+    else { audio.pause(); }
+  });
+
+  // Replay button
+  const replayBtn = document.getElementById('storyReplayBtn');
+  if(replayBtn){ replayBtn.addEventListener('click',()=>{ audio.currentTime=0; audio.play().catch(()=>{}); }); }
+
+  audio.addEventListener('play',()=>{
+    playIco.style.display='none';
+    pauseIco.style.display='';
+  });
+  audio.addEventListener('pause',()=>{
+    playIco.style.display='';
+    pauseIco.style.display='none';
+  });
+  audio.addEventListener('loadedmetadata',()=>{
+    if(durEl) durEl.textContent = fmtTime(audio.duration);
+  });
+  audio.addEventListener('timeupdate',()=>{
+    if(!audio.duration) return;
+    const pct = (audio.currentTime/audio.duration)*100;
+    if(fill) fill.style.width=pct+'%';
+    if(curTime) curTime.textContent=fmtTime(audio.currentTime);
+  });
+
+  // Click on bar to seek
+  if(bar){
+    bar.addEventListener('click',e=>{
+      if(!audio.duration) return;
+      const rect=bar.getBoundingClientRect();
+      audio.currentTime=((e.clientX-rect.left)/rect.width)*audio.duration;
+    });
+  }
+})();
+
+
+
+
+/* ============================================================
+   FAQ ACCORDION
+   ============================================================ */
+(function(){
+  document.querySelectorAll('.faq-question').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      btn.closest('.faq-item').classList.toggle('open');
+    });
+  });
+})();
+
+/* ============================================================
+   THEME MODAL
+   ============================================================ */
+(function(){
+  const backdrop = document.getElementById('themeModalBackdrop');
+  const closeBtn = document.getElementById('themeModalClose');
+  const titleEl  = document.getElementById('themeModalTitle');
+  const bodyEl   = document.getElementById('themeModalBody');
+
+  function openModal(title, sub){
+    titleEl.textContent = `Prêt à Créer Votre Chanson "${title}" ?`;
+    bodyEl.textContent  = `Rejoignez des milliers de familles qui ont transformé leurs moments "${title}" en chansons inoubliables. Votre histoire mérite d'être entendue.`;
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(){
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Attach to all theme cards
+  document.querySelectorAll('.theme-card').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      const title = card.querySelector('.theme-title')?.textContent || 'Chanson';
+      const sub   = card.querySelector('.theme-sub')?.textContent || '';
+      openModal(title, sub);
+    });
+  });
+
+  // Close on button or backdrop click
+  if(closeBtn) closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', e=>{ if(e.target === backdrop) closeModal(); });
+
+  // Close on Escape
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+})();
+
+
+(function(){
+  const track   = document.getElementById('reviewsTrack');
+  const cards   = track ? track.querySelectorAll('.review-card') : [];
+  const prevBtn = document.getElementById('reviewsPrev');
+  const nextBtn = document.getElementById('reviewsNext');
+  let idx = 0;
+  const CARD_W = () => cards[0] ? cards[0].offsetWidth + 14 : 314;
+  function goTo(i){
+    idx = Math.max(0, Math.min(cards.length-1, i));
+    track.style.transform = `translateX(${-idx * CARD_W()}px)`;
+  }
+  if(prevBtn) prevBtn.addEventListener('click', ()=> goTo(idx-1));
+  if(nextBtn) nextBtn.addEventListener('click', ()=> goTo(idx+1));
+  let tx=0;
+  if(track){
+    track.addEventListener('touchstart',e=>{ tx=e.touches[0].clientX; },{passive:true});
+    track.addEventListener('touchend',e=>{ const dx=tx-e.changedTouches[0].clientX; if(Math.abs(dx)>40) goTo(idx+(dx>0?1:-1)); });
+  }
+  window.addEventListener('resize',()=> goTo(idx));
+})();
+</script>
+<!-- FIXED BOTTOM CTA -->
+<div class="fixed-cta" id="fixedCta">
+  <a href="#" class="fixed-cta-btn">Commencer Maintenant</a>
+</div>
+
+<!-- ============================================================
+     MODAL FORMULAIRE MULTI-ÉTAPES
+     ============================================================ -->
+<div class="form-modal-backdrop" id="formModalBackdrop">
+  <div class="form-modal" id="formModal">
+
+    <!-- Header fixe -->
+    <div class="form-modal-header">
+      <button class="form-back-btn" id="formBackBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+        Retour
+      </button>
+      <span class="form-step-label" id="formStepLabel">Étape 1 sur 6</span>
+      <button class="form-close-btn" id="formCloseBtn">✕</button>
+    </div>
+
+    <!-- Barre de progression globale -->
+    <div class="form-global-progress">
+      <div class="form-global-bar" id="formGlobalBar" style="width:0%"></div>
+    </div>
+
+    <!-- Contenu des étapes -->
+    <div class="form-modal-body">
+
+      <!-- ÉTAPE 1 -->
+      <div class="form-step" id="step1">
+        <h2 class="form-title">Pour qui est cette chanson ?</h2>
+        <p class="form-subtitle">Dites-nous qui va chérir cette chanson.</p>
+        <div class="form-choice-grid two-col">
+          <button class="form-choice-btn" data-value="someone" onclick="selectChoice(this,'forWho')">
+            <span class="choice-main">Quelqu'un d'autre</span>
+            <span class="choice-sub">Un cadeau pour un proche</span>
+          </button>
+          <button class="form-choice-btn" data-value="myself" onclick="selectChoice(this,'forWho')">
+            <span class="choice-main">Moi-même</span>
+            <span class="choice-sub">Une chanson personnelle</span>
+          </button>
+        </div>
+        <!-- Champs dynamiques "Someone else" -->
+        <div class="form-dynamic-fields" id="fieldsForSomeone" style="display:none">
+          <div class="form-field">
+            <label class="form-label">Leur prénom</label>
+            <input type="text" class="form-input" id="recipientName" placeholder="Entrez leur prénom">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Votre relation <span class="optional">(optionnel)</span></label>
+            <input type="text" class="form-input" id="relationship" placeholder="ex. ma mère, un ami, mon conjoint">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Leur genre <span class="optional">(aide à personnaliser les paroles)</span></label>
+            <div class="form-choice-grid two-col small">
+              <button class="form-choice-btn" data-value="female" onclick="selectChoice(this,'gender')">
+                <span class="choice-main">Féminin</span>
+              </button>
+              <button class="form-choice-btn" data-value="male" onclick="selectChoice(this,'gender')">
+                <span class="choice-main">Masculin</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Champs dynamiques "Myself" -->
+        <div class="form-dynamic-fields" id="fieldsForMyself" style="display:none">
+          <div class="form-field">
+            <label class="form-label">Votre prénom <span class="optional">(optionnel)</span></label>
+            <input type="text" class="form-input" id="myName" placeholder="Entrez votre prénom pour personnaliser">
+          </div>
+        </div>
+      </div>
+
+      <!-- ÉTAPE 2 -->
+      <div class="form-step" id="step2" style="display:none">
+        <h2 class="form-title">Quelle est l'occasion ?</h2>
+        <p class="form-subtitle">Cela nous aide à créer le ton et le message parfaits.</p>
+        <div class="form-choice-grid three-col">
+          <button class="form-choice-btn" data-value="justbecause" onclick="selectChoice(this,'occasion')"><span class="choice-main">Juste Parce Que</span></button>
+          <button class="form-choice-btn occasion-featured" data-value="fathersday" onclick="selectChoice(this,'occasion')">
+            <span class="choice-badge">Fête des Pères — 21 juin</span>
+            <span class="choice-main">Fête des Pères</span>
+          </button>
+          <button class="form-choice-btn" data-value="anniversary" onclick="selectChoice(this,'occasion')"><span class="choice-main">Anniversaire de Mariage</span></button>
+          <button class="form-choice-btn" data-value="birthday" onclick="selectChoice(this,'occasion')"><span class="choice-main">🎂 Anniversaire</span></button>
+          <button class="form-choice-btn" data-value="graduation" onclick="selectChoice(this,'occasion')"><span class="choice-main">🎓 Diplôme</span></button>
+          <button class="form-choice-btn" data-value="wedding" onclick="selectChoice(this,'occasion')"><span class="choice-main">Mariage</span></button>
+          <button class="form-choice-btn" data-value="memorial" onclick="selectChoice(this,'occasion')"><span class="choice-main">Hommage</span></button>
+          <button class="form-choice-btn" data-value="worship" onclick="selectChoice(this,'occasion')"><span class="choice-main">Culte</span></button>
+          <button class="form-choice-btn" data-value="babydedication" onclick="selectChoice(this,'occasion')"><span class="choice-main">Dédicace de Bébé</span></button>
+          <button class="form-choice-btn" data-value="encouragement" onclick="selectChoice(this,'occasion')"><span class="choice-main">Encouragement</span></button>
+          <button class="form-choice-btn" data-value="mothersday" onclick="selectChoice(this,'occasion')"><span class="choice-main">Fête des Mères</span></button>
+          <button class="form-choice-btn" data-value="retirement" onclick="selectChoice(this,'occasion')"><span class="choice-main">Retraite</span></button>
+          <button class="form-choice-btn" data-value="baptism" onclick="selectChoice(this,'occasion')"><span class="choice-main">Baptême</span></button>
+          <button class="form-choice-btn" data-value="lullaby" onclick="selectChoice(this,'occasion')"><span class="choice-main">Berceuse</span></button>
+          <button class="form-choice-btn" data-value="engagement" onclick="selectChoice(this,'occasion')"><span class="choice-main">Fiançailles</span></button>
+          <button class="form-choice-btn" data-value="other" onclick="selectChoice(this,'occasion')"><span class="choice-main">Autre</span></button>
+        </div>
+      </div>
+
+      <!-- ÉTAPE 3 -->
+      <div class="form-step" id="step3" style="display:none">
+        <h2 class="form-title">Quels thèmes résonnent ?</h2>
+        <p class="form-subtitle">Sélectionnez jusqu'à 5 thèmes pour votre chanson.</p>
+        <div class="form-tags-wrap" id="themeTags">
+          <button class="form-tag" data-value="foi" onclick="toggleTag(this,'themes',5)">Foi</button>
+          <button class="form-tag" data-value="espoir" onclick="toggleTag(this,'themes',5)">Espoir</button>
+          <button class="form-tag" data-value="amour" onclick="toggleTag(this,'themes',5)">Amour</button>
+          <button class="form-tag" data-value="paix" onclick="toggleTag(this,'themes',5)">Paix</button>
+          <button class="form-tag" data-value="joie" onclick="toggleTag(this,'themes',5)">Joie</button>
+          <button class="form-tag" data-value="gratitude" onclick="toggleTag(this,'themes',5)">Gratitude</button>
+          <button class="form-tag" data-value="guerison" onclick="toggleTag(this,'themes',5)">Guérison</button>
+          <button class="form-tag" data-value="reconfort" onclick="toggleTag(this,'themes',5)">Réconfort</button>
+          <button class="form-tag" data-value="force" onclick="toggleTag(this,'themes',5)">Force</button>
+          <button class="form-tag" data-value="guidance" onclick="toggleTag(this,'themes',5)">Guidance</button>
+          <button class="form-tag" data-value="pardon" onclick="toggleTag(this,'themes',5)">Pardon</button>
+          <button class="form-tag" data-value="grace" onclick="toggleTag(this,'themes',5)">Grâce</button>
+          <button class="form-tag" data-value="famille" onclick="toggleTag(this,'themes',5)">Famille</button>
+          <button class="form-tag" data-value="heritage" onclick="toggleTag(this,'themes',5)">Héritage</button>
+          <button class="form-tag" data-value="nouveauxdebuts" onclick="toggleTag(this,'themes',5)">Nouveaux Départs</button>
+          <button class="form-tag" data-value="souvenir" onclick="toggleTag(this,'themes',5)">Souvenir</button>
+          <button class="form-tag" data-value="celebration" onclick="toggleTag(this,'themes',5)">Célébration</button>
+          <button class="form-tag" data-value="courage" onclick="toggleTag(this,'themes',5)">Courage</button>
+          <button class="form-tag" data-value="devotion" onclick="toggleTag(this,'themes',5)">Dévotion</button>
+        </div>
+        <p class="form-tag-count" id="themeCount">0 sur 5 thèmes sélectionnés</p>
+      </div>
+
+      <!-- ÉTAPE 4 -->
+      <div class="form-step" id="step4" style="display:none">
+        <h2 class="form-title">Choisissez votre style</h2>
+        <p class="form-subtitle">Comment voulez-vous que votre chanson sonne ?</p>
+        <p class="form-section-label">Style Musical</p>
+        <div class="form-choice-grid two-col">
+          <button class="form-choice-btn" data-value="worship" onclick="selectChoice(this,'style')">
+            <span class="choice-main">Worship</span><span class="choice-sub">Révérencieux et dévoué</span>
+          </button>
+          <button class="form-choice-btn" data-value="gospel" onclick="selectChoice(this,'style')">
+            <span class="choice-main">Gospel</span><span class="choice-sub">Soul et inspirant</span>
+          </button>
+          <button class="form-choice-btn" data-value="contemporary" onclick="selectChoice(this,'style')">
+            <span class="choice-main">Contemporain</span><span class="choice-sub">Moderne et accessible</span>
+          </button>
+          <button class="form-choice-btn" data-value="acoustic" onclick="selectChoice(this,'style')">
+            <span class="choice-main">Acoustique</span><span class="choice-sub">Chaleureux et intime</span>
+          </button>
+          <button class="form-choice-btn" data-value="country" onclick="selectChoice(this,'style')">
+            <span class="choice-main">Country</span><span class="choice-sub">Chaleureux et sincère</span>
+          </button>
+          <button class="form-choice-btn" data-value="rnb" onclick="selectChoice(this,'style')">
+            <span class="choice-main">R&B / Soul</span><span class="choice-sub">Riche et émouvant</span>
+          </button>
+          <button class="form-choice-btn" data-value="popballad" onclick="selectChoice(this,'style')">
+            <span class="choice-main">Pop Ballade</span><span class="choice-sub">Moderne et mélodieux</span>
+          </button>
+          <button class="form-choice-btn" data-value="cinematic" onclick="selectChoice(this,'style')">
+            <span class="choice-main">Cinématique</span><span class="choice-sub">Épique et orchestral</span>
+          </button>
+          <button class="form-choice-btn" data-value="lullaby" onclick="selectChoice(this,'style')">
+            <span class="choice-main">Berceuse</span><span class="choice-sub">Doux et apaisant</span>
+          </button>
+        </div>
+        <p class="form-section-label" style="margin-top:20px;">Tempo</p>
+        <div class="form-choice-grid three-col">
+          <button class="form-choice-btn" data-value="slow" onclick="selectChoice(this,'tempo')">
+            <span class="choice-main">Lent</span><span class="choice-sub">Réflexif et paisible</span>
+          </button>
+          <button class="form-choice-btn" data-value="medium" onclick="selectChoice(this,'tempo')">
+            <span class="choice-main">Moyen</span><span class="choice-sub">Équilibré et régulier</span>
+          </button>
+          <button class="form-choice-btn" data-value="upbeat" onclick="selectChoice(this,'tempo')">
+            <span class="choice-main">Entraînant</span><span class="choice-sub">Joyeux et énergique</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ÉTAPE 5 -->
+      <div class="form-step" id="step5" style="display:none">
+        <h2 class="form-title">Choisissez la voix</h2>
+        <p class="form-subtitle">Quel type de voix souhaitez-vous pour votre chanson ?</p>
+        <div class="form-choice-grid two-col">
+          <button class="form-choice-btn" data-value="female" onclick="selectChoice(this,'voice')">
+            <span class="choice-main">Féminine</span>
+            <span class="choice-sub">Chanteuse solo</span>
+          </button>
+          <button class="form-choice-btn" data-value="male" onclick="selectChoice(this,'voice')">
+            <span class="choice-main">Masculine</span>
+            <span class="choice-sub">Chanteur solo</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ÉTAPE 6 -->
+      <div class="form-step" id="step6" style="display:none">
+        <h2 class="form-title">Partagez votre histoire</h2>
+        <p class="form-subtitle">Parlez-nous de la personne, du moment, ou du message que vous voulez capturer.</p>
+        <div class="story-progress-wrap">
+          <div class="story-progress-label">
+            <span id="formProgressMsg">✦ Commencez à écrire pour débuter...</span>
+          </div>
+          <div class="story-progress-bar-bg">
+            <div class="story-progress-bar-fill" id="formProgressFill"></div>
+          </div>
+        </div>
+        <textarea
+          class="form-textarea"
+          id="storyText"
+          placeholder="Décrivez le souvenir, la personne, ou ce que vous souhaitez que cette chanson exprime. Plus vous partagez de détails, plus votre chanson sera personnelle..."
+          oninput="updateStoryProgress()"
+        ></textarea>
+        <p class="story-min-hint" id="storyMinHint" style="display:none">Minimum 20 caractères requis</p>
+      </div>
+
+    </div><!-- /body -->
+
+    <!-- Footer fixe avec bouton Next -->
+    <div class="form-modal-footer">
+      <button class="form-next-btn" id="formNextBtn" onclick="nextStep()">
+        Suivant <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<style>
+/* ===== FORM MODAL ===== */
+.form-modal-backdrop {
+  position:fixed;inset:0;z-index:10000;
+  background:#FAFAF8;
+  display:none;align-items:stretch;justify-content:center;
+}
+.form-modal-backdrop.open { display:flex; }
+.form-modal {
+  background:#FAFAF8;
+  width:100%;max-width:100%;
+  border-radius:0;
+  height:100%;max-height:100%;
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  box-sizing:border-box;
+  position:relative;
+}
+@media(min-width:600px){
+  .form-modal-backdrop { background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);align-items:center;justify-content:center; }
+  .form-modal { border-radius:20px;max-width:560px;height:auto;max-height:90vh; }
+}
+
+/* Header */
+.form-modal-header {
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 20px 12px;
+  background:#FAFAF8;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.form-back-btn {
+  display:flex;align-items:center;gap:4px;
+  background:none;border:none;cursor:pointer;
+  font-size:14px;font-weight:500;color:var(--text-secondary);
+  font-family:var(--sans);padding:0;
+}
+.form-back-btn:hover { color:var(--text-primary); }
+.form-step-label { font-size:13px;font-weight:600;color:var(--text-primary); }
+.form-close-btn {
+  background:var(--cream-dark);border:none;border-radius:50%;
+  width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:14px;color:var(--text-muted);
+}
+.form-close-btn:hover { background:var(--border); }
+
+/* Global progress bar */
+.form-global-progress {
+  height:3px;background:var(--border);flex-shrink:0;
+}
+.form-global-bar {
+  height:100%;background:var(--dark);
+  transition:width 0.35s ease;border-radius:0 2px 2px 0;
+}
+
+/* Body */
+.form-modal-body {
+  flex:1;overflow-y:auto;overflow-x:hidden;
+  padding:24px 20px 16px;
+  -webkit-overflow-scrolling:touch;
+  box-sizing:border-box;
+  width:100%;
+}
+.form-title {
+  font-family:var(--serif);font-size:clamp(22px,4vw,30px);
+  font-weight:400;color:var(--text-primary);
+  text-align:center;margin-bottom:8px;line-height:1.2;
+}
+.form-subtitle {
+  font-size:14px;color:var(--text-muted);
+  text-align:center;margin-bottom:24px;line-height:1.5;
+}
+.form-section-label {
+  font-size:12px;font-weight:600;letter-spacing:0.08em;
+  text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;
+}
+
+/* Choice grid */
+.form-choice-grid { display:grid;gap:10px;margin-bottom:20px;width:100%; }
+.form-choice-grid.two-col { grid-template-columns:1fr 1fr; }
+.form-choice-grid.three-col { grid-template-columns:1fr 1fr 1fr; }
+.form-choice-grid.small .form-choice-btn { padding:10px 12px; }
+
+.form-choice-btn {
+  background:#fff;border:1.5px solid var(--border);border-radius:12px;
+  padding:14px 10px;cursor:pointer;text-align:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  transition:border-color 0.15s,background 0.15s,color 0.15s;
+  font-family:var(--sans);position:relative;
+  color:var(--text-primary);
+  -webkit-appearance:none;appearance:none;
+  word-break:break-word;
+  min-height:56px;
+  box-sizing:border-box;
+}
+.form-choice-btn:hover { border-color:var(--text-secondary); }
+.form-choice-btn.selected {
+  background:#3D2B1F;border-color:#3D2B1F;color:#fff;
+}
+.form-choice-btn.selected .choice-sub { color:rgba(255,255,255,0.7); }
+.choice-main { font-size:13px;font-weight:600;color:inherit;line-height:1.3; }
+.choice-sub { font-size:11px;color:var(--text-muted);line-height:1.3; }
+
+/* Featured occasion */
+.occasion-featured { border-color:#E8A0C0 !important; }
+.choice-badge {
+  position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+  background:#F0A0C0;color:#fff;font-size:10px;font-weight:600;
+  padding:2px 10px;border-radius:20px;white-space:nowrap;
+}
+
+/* Tags */
+.form-tags-wrap {
+  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;
+}
+.form-tag {
+  background:#fff;border:1.5px solid var(--border);border-radius:100px;
+  padding:8px 16px;font-size:13px;font-weight:500;cursor:pointer;
+  font-family:var(--sans);color:var(--text-secondary);
+  transition:all 0.15s;
+}
+.form-tag:hover { border-color:var(--text-secondary); }
+.form-tag.selected {
+  background:#3D2B1F;border-color:#3D2B1F;color:#fff;
+}
+.form-tag-count {
+  font-size:12px;color:var(--text-muted);text-align:center;margin-top:4px;
+}
+
+/* Fields */
+.form-dynamic-fields { margin-top:4px; }
+.form-field { margin-bottom:16px; }
+.form-label { display:block;font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:7px; }
+.optional { font-weight:400;color:var(--text-muted); }
+.form-input {
+  width:100%;border:1.5px solid var(--border);border-radius:10px;
+  padding:13px 14px;font-size:14px;font-family:var(--sans);
+  color:var(--text-primary);background:#fff;outline:none;
+  transition:border-color 0.15s;
+}
+.form-input:focus { border-color:#3D2B1F; }
+
+/* Story progress */
+.story-progress-wrap { margin-bottom:14px; }
+.story-progress-label {
+  margin-bottom:7px;
+}
+#formProgressMsg {
+  font-size:13px;
+  color:#C0622A;
+  font-weight:500;
+  display:flex;align-items:center;gap:6px;
+}
+.story-progress-bar-bg {
+  height:10px;
+  background:#E0DBD3;
+  border-radius:6px;
+  overflow:hidden;
+}
+.story-progress-bar-fill {
+  height:100%;
+  width:0%;
+  background:#C0622A;
+  border-radius:6px;
+  transition:width 0.15s ease-out;
+}
+.form-textarea {
+  width:100%;min-height:140px;
+  border:1.5px solid var(--border);border-radius:12px;
+  padding:14px;font-size:14px;font-family:var(--sans);
+  color:var(--text-primary);background:#fff;outline:none;
+  resize:vertical;line-height:1.6;
+  transition:border-color 0.15s;
+}
+.form-textarea:focus { border-color:#3D2B1F; }
+.story-min-hint { font-size:12px;color:#C0622A;margin-top:6px;text-align:center; }
+
+/* Footer */
+.form-modal-footer {
+  padding:14px 24px 20px;
+  background:#FAFAF8;border-top:1px solid var(--border);flex-shrink:0;
+  padding-bottom:calc(14px + env(safe-area-inset-bottom));
+}
+.form-next-btn {
+  width:100%;background:#3D2B1F;color:#fff;
+  border:none;border-radius:12px;
+  padding:17px 24px;font-size:16px;font-weight:700;
+  font-family:var(--sans);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:background 0.15s,opacity 0.15s;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+}
+.form-next-btn:hover { background:#2A1F14; }
+.form-next-btn:disabled { opacity:0.45;cursor:not-allowed; }
+</style>
+
+<script>
+/* ============================================================
+   MULTI-STEP FORM
+   ============================================================ */
+const formData = {
+  forWho: null, recipientName:'', relationship:'', gender:null,
+  myName:'', occasion:null, themes:[], style:null, tempo:null,
+  voice:null, story:''
+};
+
+let currentStep = 1;
+const totalSteps = 6;
+
+const storyMessages = [
+  '✦ Commencez à écrire pour remplir la jauge...',
+  '🔥 Bon début ! Continuez...',
+  '⭐ C\'est bien parti ! On adore les détails.',
+  '🎯 Excellent ! Vous faites du très bon travail.',
+  '🚀 Presque parfait ! Encore un peu...',
+  '✨ Incroyable ! Votre histoire est magnifique.',
+];
+
+function openFormModal(){
+  document.getElementById('formModalBackdrop').classList.add('open');
+  document.body.style.overflow='hidden';
+  updateFormUI();
+}
+function closeFormModal(){
+  document.getElementById('formModalBackdrop').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// Attach to all CTA buttons — intercept BEFORE navigation
+document.addEventListener('click', function(e){
+  const btn = e.target.closest('.btn-primary, .btn-purple-cta, .btn-modal-cta, .fixed-cta-btn, .top-bar-link, .btn-nav');
+  if(!btn) return;
+  const href = btn.getAttribute('href');
+  if(href === '#' || href === null || href === ''){
+    e.preventDefault();
+    e.stopPropagation();
+    openFormModal();
+  }
+}, true); // capture phase — fires before link navigation
+
+document.getElementById('formCloseBtn').addEventListener('click', closeFormModal);
+document.getElementById('formModalBackdrop').addEventListener('click', e=>{
+  if(e.target === document.getElementById('formModalBackdrop')) closeFormModal();
+});
+
+function selectChoice(btn, field){
+  // Deselect siblings in same group
+  btn.closest('.form-choice-grid').querySelectorAll('.form-choice-btn').forEach(b=> b.classList.remove('selected'));
+  btn.classList.add('selected');
+  formData[field] = btn.dataset.value;
+
+  // Step 1 dynamic fields
+  if(field === 'forWho'){
+    document.getElementById('fieldsForSomeone').style.display = btn.dataset.value==='someone' ? 'block' : 'none';
+    document.getElementById('fieldsForMyself').style.display  = btn.dataset.value==='myself'  ? 'block' : 'none';
+  }
+  updateNextBtn();
+}
+
+function toggleTag(btn, field, max){
+  const selected = document.querySelectorAll(`#themeTags .form-tag.selected`);
+  if(!btn.classList.contains('selected') && selected.length >= max){
+    btn.classList.add('shake');
+    setTimeout(()=> btn.classList.remove('shake'), 400);
+    return;
+  }
+  btn.classList.toggle('selected');
+  formData[field] = [...document.querySelectorAll(`#themeTags .form-tag.selected`)].map(b=> b.dataset.value);
+  document.getElementById('themeCount').textContent = `${formData[field].length} sur ${max} thèmes sélectionnés`;
+  updateNextBtn();
+}
+
+function updateStoryProgress(){
+  const text = document.getElementById('storyText').value;
+  const len = text.length;
+  const MIN = 20;
+  const target = 300;
+  const pct = Math.min(100, Math.round((len/target)*100));
+
+  const fill = document.getElementById('formProgressFill');
+  if(fill) fill.style.width = pct+'%';
+
+  const msg = document.getElementById('formProgressMsg');
+  if(msg){
+    if(len === 0){
+      msg.innerHTML = '✦ Commencez à écrire pour débuter...';
+    } else if(len < MIN){
+      const left = MIN - len;
+      msg.innerHTML = `✦ Encore ${left} caractère${left>1?'s':''} pour commencer...`;
+    } else {
+      msg.innerHTML = '✦ Continuez, plus de détails = meilleure chanson...';
+    }
+  }
+
+  formData.story = text;
+  updateNextBtn();
+}
+
+function updateNextBtn(){
+  const btn = document.getElementById('formNextBtn');
+  let enabled = false;
+  switch(currentStep){
+    case 1: enabled = !!formData.forWho; break;
+    case 2: enabled = !!formData.occasion; break;
+    case 3: enabled = formData.themes.length > 0; break;
+    case 4: enabled = !!formData.style; break;
+    case 5: enabled = !!formData.voice; break;
+    case 6:
+      enabled = formData.story.length >= 20;
+      btn.textContent = '';
+      btn.innerHTML = enabled
+        ? 'Créer Ma Chanson <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>'
+        : 'Créer Ma Chanson <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>';
+      break;
+  }
+  btn.disabled = !enabled;
+}
+
+function nextStep(){
+  if(currentStep === 6){
+    submitForm(); return;
+  }
+  currentStep++;
+  updateFormUI();
+}
+
+document.getElementById('formBackBtn').addEventListener('click', ()=>{
+  if(currentStep > 1){ currentStep--; updateFormUI(); }
+  else closeFormModal();
+});
+
+function updateFormUI(){
+  // Show/hide steps
+  for(let i=1;i<=totalSteps;i++){
+    document.getElementById('step'+i).style.display = i===currentStep ? 'block' : 'none';
+  }
+  // Progress bar
+  document.getElementById('formGlobalBar').style.width = ((currentStep-1)/totalSteps*100)+'%';
+  // Step label
+  document.getElementById('formStepLabel').textContent = `Étape ${currentStep} sur ${totalSteps}`;
+  // Back btn
+  document.getElementById('formBackBtn').style.visibility = currentStep>1 ? 'visible' : 'hidden';
+  // Next btn text
+  const btn = document.getElementById('formNextBtn');
+  if(currentStep < 6){
+    btn.innerHTML = 'Suivant <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>';
+  } else {
+    btn.innerHTML = 'Créer Ma Chanson <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>';
+  }
+  // Scroll to top of body
+  document.getElementById('formModal').querySelector('.form-modal-body').scrollTop = 0;
+  updateNextBtn();
+}
+
+function submitForm(){
+  const payload = {
+    recipientName: formData.forWho === 'someone'
+      ? (document.getElementById('recipientName')?.value || 'Destinataire')
+      : (document.getElementById('myName')?.value || 'Moi-même'),
+    occasion: formData.occasion || '',
+    description: formData.story || '',
+    musicStyle: [formData.style, formData.tempo, formData.voice].filter(Boolean).join(', '),
+    email: '' // sera collecté à l'étape suivante
+  };
+
+  // Ajouter étape email avant de soumettre
+  document.getElementById('formModal').innerHTML = `
+    <div class="form-modal-header">
+      <button class="form-back-btn" onclick="history.back()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+        Retour
+      </button>
+      <span class="form-step-label">Presque terminé !</span>
+      <button class="form-close-btn" onclick="closeFormModal()">✕</button>
+    </div>
+    <div class="form-global-progress"><div class="form-global-bar" style="width:95%"></div></div>
+    <div class="form-modal-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;text-align:center;gap:20px;">
+      <div style="width:56px;height:56px;background:#F0EAF5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;">🎵</div>
+      <h2 class="form-title" style="margin-bottom:4px;">Où envoyer votre chanson ?</h2>
+      <p class="form-subtitle" style="margin-bottom:0;">Entrez votre email pour recevoir la chanson une fois créée.</p>
+      <div style="width:100%;max-width:400px;text-align:left;">
+        <label class="form-label">Votre adresse email</label>
+        <input type="email" class="form-input" id="userEmail" placeholder="votre@email.com" style="margin-bottom:16px;">
+        <button class="form-next-btn" id="submitFinalBtn" onclick="sendToAPI()" style="width:100%;">
+          Passer au paiement →
+        </button>
+        <p style="font-size:12px;color:var(--text-muted);text-align:center;margin-top:10px;">
+          🔒 Paiement sécurisé · Satisfaction garantie
+        </p>
+      </div>
+    </div>
+  `;
+
+  window._pendingPayload = payload;
+}
+
+async function sendToAPI(){
+  const email = document.getElementById('userEmail')?.value;
+  if(!email || !email.includes('@')){
+    document.getElementById('userEmail').style.borderColor = '#C0622A';
+    return;
+  }
+
+  const btn = document.getElementById('submitFinalBtn');
+  btn.disabled = true;
+  btn.innerHTML = 'Traitement en cours...';
+
+  const payload = {
+    ...window._pendingPayload,
+    email: email
+  };
+
+  try {
+    const res = await fetch('/api/create-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if(data.success && data.checkoutUrl){
+      // Redireciona para o PerfectPay
+      window.location.href = data.checkoutUrl;
+    } else {
+      btn.disabled = false;
+      btn.innerHTML = 'Réessayer →';
+      alert('Erreur: ' + (data.error || 'Veuillez réessayer'));
+    }
+  } catch(err) {
+    btn.disabled = false;
+    btn.innerHTML = 'Réessayer →';
+    alert('Erreur de connexion. Veuillez réessayer.');
+  }
+}
+</script>
+
+
+<script>
+(function(){
+  var cta = document.getElementById('fixedCta');
+  if(!cta) return;
+  function check(){
+    if(window.innerWidth >= 901){ cta.style.display='none'; return; }
+    cta.style.display = window.scrollY > 300 ? 'block' : 'none';
+  }
+  window.addEventListener('scroll', check, {passive:true});
+  window.addEventListener('resize', check, {passive:true});
+  check();
+})();
+</script>
+
+</body>
+</html>
