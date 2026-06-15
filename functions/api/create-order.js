@@ -39,7 +39,7 @@ export async function onRequest(context) {
     }))
 
     // Montar URL do checkout PerfectPay
-    const checkoutUrl = `https://app.perfectpay.com.br/pay/PPPBET8O?email=${encodeURIComponent(email)}&name=${encodeURIComponent(recipientName)}&order_id=${orderId}`
+    const checkoutUrl = `https://app.perfectpay.com.br/pay/PPPBET8O?email=${encodeURIComponent(email)}&name=${encodeURIComponent(recipientName)}&tracker=${orderId}`
 
     return new Response(JSON.stringify({
       success: true,
