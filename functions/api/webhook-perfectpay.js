@@ -109,7 +109,7 @@ function buildPrompt(order) {
 
 async function generateMusic(prompt, env) {
   try {
-    const response = await fetch('https://api.aimlapi.com/v2/generate/audio/suno-ai/clip', {
+    const response = await fetch('https://api.aimlapi.com/v1/generate/audio/suno-ai/clip', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${env.AIMUSIC_API_KEY}`,
