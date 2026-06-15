@@ -15,7 +15,7 @@ export async function onRequest(context) {
 
     const email = body.customer?.email
     const name = body.customer?.name
-    const orderId = body.sale_id || body.transaction_id
+    const orderId = body.tracker_id || body.tracker || body.sale_id || body.transaction_id
 
     if (!email || !orderId) {
       return new Response('missing data', { status: 400 })
