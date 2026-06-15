@@ -9,6 +9,3 @@ id = "63e8cd6910fb40648f50f9d40dce7cee"
 [[r2_buckets]]
 binding = "AUDIO_BUCKET"
 bucket_name = "chansondivine-audios"
-
-[triggers]
-crons = ["* * * * *"]
