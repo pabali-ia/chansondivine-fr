@@ -16,7 +16,7 @@ export async function onRequest(context) {
 
     const email = body.customer?.email
     const name = body.customer?.name
-    const orderId = body.order_id || body.tracker_id || body.tracker || body.sale_id || body.transaction_id
+    const orderId = body.metadata?.src || body.metadata?.utm_content || body.order_id || body.tracker_id || body.code
 
     console.log('Order ID:', orderId, '| Email:', email)
 
