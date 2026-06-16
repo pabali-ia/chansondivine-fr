@@ -39,7 +39,7 @@ export async function onRequest(context) {
     }))
 
     // Montar URL do checkout PerfectPay
-   const checkoutUrl = `https://go.centerpag.com/PPU38CQD6DB?email=${encodeURIComponent(email)}&name=${encodeURIComponent(recipientName)}&tracker=${orderId}`
+  const checkoutUrl = `https://go.centerpag.com/PPU38CQD6DB?email=${encodeURIComponent(email)}&name=${encodeURIComponent(recipientName)}&src=${orderId}`
 
     return new Response(JSON.stringify({
       success: true,
