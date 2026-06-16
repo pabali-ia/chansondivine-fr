@@ -9,7 +9,7 @@ export async function onRequest(context) {
     const body = await request.json()
     console.log('Webhook received:', JSON.stringify(body))
 
-    if (body.sale_status !== 'approved') {
+    if (body.sale_status !== 'approved' && body.sale_status_enum !== 2) {
       console.log('Ignored status:', body.sale_status)
       return new Response('ignored', { status: 200 })
     }
