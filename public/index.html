@@ -1799,8 +1799,29 @@ storySong: 'https://pub-275fe228c1124aca8a7ee5d20e0b170d.r2.dev/song.mp3',
 };
 </script>
 
+};
+
+/* HLS LAZY LOADER */
+function loadHLS(videoEl, src) {
+  if (!src) return;
+  if (!src.includes('.m3u8')) { videoEl.src = src; return; }
+  if (typeof Hls === 'undefined') return;
+  if (Hls.isSupported()) {
+    const hls = new Hls({ autoStartLoad: true, startLevel: -1, maxBufferLength: 15, maxMaxBufferLength: 30, lowLatencyMode: false });
+    hls.loadSource(src);
+    hls.attachMedia(videoEl);
+    videoEl._hls = hls;
+  } else if (videoEl.canPlayType('application/vnd.apple.mpegurl')) {
+    videoEl.src = src;
+    videoEl.load();
+  }
+}
+</script>
+
+<!-- HLS.js -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js"></script>
+
 <!-- TOP BAR — gradient dark -->
-<div class="top-bar">
   <span class="top-bar-text"><em>Les Soldes Fête des Pères Se Terminent Bientôt !</em> &nbsp;—&nbsp; <a href="#" class="top-bar-link">Commencer Maintenant →</a></span>
 </div>
 
