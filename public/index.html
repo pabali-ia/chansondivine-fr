@@ -1767,10 +1767,6 @@
   Format typique: https://pub-XXXX.r2.dev/votre-fichier.mp4
 =============================================================
 -->
-<!-- HLS.js para Cloudflare Stream -->
-<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js"></script>
-<script>
-/* HLS loader helper */
 function loadHLS(videoEl, src){
   if(!src) return;
   if(!src.includes('.m3u8')){ videoEl.src = src; return; }
@@ -1779,13 +1775,10 @@ function loadHLS(videoEl, src){
     hls.loadSource(src);
     hls.attachMedia(videoEl);
     videoEl._hls = hls;
-   
-    };
   } else if(videoEl.canPlayType('application/vnd.apple.mpegurl')){
-    videoEl.src = src; // Safari nativo
+    videoEl.src = src;
   }
 }
-</script>
 <script>
 const R2 = {
   // Vidéo hero — Section 2
