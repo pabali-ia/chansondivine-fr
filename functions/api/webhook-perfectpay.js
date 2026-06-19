@@ -103,17 +103,17 @@ export async function onRequest(context) {
 
 function buildPrompt(order) {
   const parts = [
-    `Create a ${order.musicStyle} song in French`,
-    `This song is for ${order.recipientName}`,
-    `Occasion: ${order.occasion}`,
+    `Style musical obligatoire: ${order.musicStyle}`,
+    `Une chanson émouvante en français pour ${order.recipientName}`,
+    `À l'occasion de: ${order.occasion}`,
   ]
   if (order.themes && order.themes.length > 0) {
-    parts.push(`Themes: ${Array.isArray(order.themes) ? order.themes.join(', ') : order.themes}`)
+    parts.push(`Thèmes: ${Array.isArray(order.themes) ? order.themes.join(', ') : order.themes}`)
   }
   if (order.description) {
-    parts.push(`Story and inspiration: ${order.description}`)
+    parts.push(`Histoire: ${order.description}`)
   }
-  parts.push(`IMPORTANT: The musical style MUST be ${order.musicStyle}. Lyrics in French only.`)
+  parts.push(`IMPORTANT: style ${order.musicStyle}. Paroles en français uniquement.`)
   return parts.join('. ')
 }
 
