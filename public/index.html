@@ -1799,9 +1799,7 @@ storySong: 'https://pub-275fe228c1124aca8a7ee5d20e0b170d.r2.dev/song.mp3',
 };
 </script>
 
-};
-
-/* HLS LAZY LOADER */
+<script>
 function loadHLS(videoEl, src) {
   if (!src) return;
   if (!src.includes('.m3u8')) { videoEl.src = src; return; }
@@ -1820,7 +1818,6 @@ function loadHLS(videoEl, src) {
 
 <!-- HLS.js -->
 <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js"></script>
-
 <!-- TOP BAR — gradient dark -->
   <span class="top-bar-text"><em>Les Soldes Fête des Pères Se Terminent Bientôt !</em> &nbsp;—&nbsp; <a href="#" class="top-bar-link">Commencer Maintenant →</a></span>
 </div>
