@@ -1775,14 +1775,11 @@ function loadHLS(videoEl, src){
   if(!src) return;
   if(!src.includes('.m3u8')){ videoEl.src = src; return; }
   if(Hls.isSupported()){
-    const hls = new Hls({ autoStartLoad:false, startLevel:-1, maxBufferLength:20 });
+    const hls = new Hls({ autoStartLoad:true, startLevel:-1, maxBufferLength:20 });
     hls.loadSource(src);
     hls.attachMedia(videoEl);
     videoEl._hls = hls;
-    const origPlay = videoEl.play.bind(videoEl);
-    videoEl.play = function(){
-      if(!videoEl._hlsStarted){ hls.startLoad(); videoEl._hlsStarted=true; }
-      return origPlay();
+   
     };
   } else if(videoEl.canPlayType('application/vnd.apple.mpegurl')){
     videoEl.src = src; // Safari nativo
