@@ -1767,18 +1767,7 @@
   Format typique: https://pub-XXXX.r2.dev/votre-fichier.mp4
 =============================================================
 -->
-function loadHLS(videoEl, src){
-  if(!src) return;
-  if(!src.includes('.m3u8')){ videoEl.src = src; return; }
-  if(Hls.isSupported()){
-    const hls = new Hls({ autoStartLoad:true, startLevel:-1, maxBufferLength:20 });
-    hls.loadSource(src);
-    hls.attachMedia(videoEl);
-    videoEl._hls = hls;
-  } else if(videoEl.canPlayType('application/vnd.apple.mpegurl')){
-    videoEl.src = src;
-  }
-}
+
 <script>
 const R2 = {
   // Vidéo hero — Section 2
