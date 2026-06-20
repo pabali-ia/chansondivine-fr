@@ -3055,12 +3055,17 @@ function fmtTime(s) {
   const TOTAL  = cards.length;
 
   // Assign video sources + posters
-  cards.forEach((card, i)=>{
+cards.forEach((card, i)=>{
     const vid = card.querySelector('.card-video-el');
     if (!vid) return;
     if (R2.carousel[i]) loadHLS(vid, R2.carousel[i]);
     if (R2.carouselPosters[i]) vid.poster = R2.carouselPosters[i];
-  });
+    // Carrega mas mantém pausado — esconde poster quando pronto
+    vid.addEventListener('canplay', ()=>{
+        const poster = card.querySelector('.card-video-poster');
+        if(poster) poster.classList.add('hidden');
+    }, { once: true });
+});
 
   // Per-card video interaction
   cards.forEach((card)=>{
